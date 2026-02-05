@@ -14,13 +14,13 @@ const repo = "gusuessler-gusUesslerPersonalOSPostifolio";
 const basePath = isProd ? `/${repo}` : "";
 
 export const metadata: Metadata = {
-  title: "Uessler.com",
+  title: "Uessler OS",
   description: "Uessler OS",
   openGraph: {
-    title: "Uessler.com",
-    description: "Uessler OS",
+    title: "Uessler OS",
+    description: "Gustavo Uessler OS",
     url: "https://uessler.com",
-    siteName: "Uessler.com",
+    siteName: "Uessler OS",
     images: [
       {
         url: `${basePath}/Ufavicon.png`,
@@ -33,8 +33,8 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Uessler.com",
-    description: "Uessler OS",
+    title: "Uessler OS",
+    description: "Gustavo Uessler OS",
     images: [`${basePath}/Ufavicon.png`],
   },
 };

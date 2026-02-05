@@ -5,10 +5,11 @@ import WeatherWidget from "./WeatherWidget";
 import ClockWidget from "./ClockWidget";
 
 // Images
-import logoTriad from "@/assets/logoTriad.png";
+
 import gustavoLogo from "@/assets/GustavoUesslerCNlogo.jpg";
 import userImage from "@/assets/userImageCartoon.png";
 import facePic from "@/assets/facePic.jpg";
+import logoTriad from "@/assets/logoTriad.png";
 
 type AppId = "about" | "cv" | "contact" | "terminal" | "browser" | "trash" | "yuj";
 
