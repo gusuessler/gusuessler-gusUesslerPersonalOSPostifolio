@@ -1497,7 +1497,7 @@ export default function Desktop() {
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </span>
-                        <img src="/GustavoUesslerCNlogo.jpg" alt="Gustavo Uessler" className="h-full w-auto object-cover" />
+                        <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/GustavoUesslerCNlogo.jpg`} alt="Gustavo Uessler" className="h-full w-auto object-cover" />
                     </div>
                 )}
                 <div className="flex items-center gap-4 relative">
@@ -1526,7 +1526,7 @@ export default function Desktop() {
                         className="relative"
                     >
                         <img
-                            src="/userImageCartoon.png"
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/userImageCartoon.png`}
                             alt="User Profile"
                             className="h-8 w-8 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-colors object-cover"
                         />
