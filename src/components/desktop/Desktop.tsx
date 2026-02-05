@@ -1671,12 +1671,12 @@ export default function Desktop() {
                                     "FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO"
                                 ].map((text, i) => (
                                     <div key={i} className={`flex whitespace-nowrap ${i % 2 === 0 ? 'animate-marquee' : 'animate-marquee-reverse'}`} style={{ animationDuration: `${25 + i * 2}s` }}>
-                                        <h1 className="gradient-text text-[13vh] font-black tracking-tighter mix-blend-multiply opacity-30 px-4">
+                                        <div className="gradient-text text-[13vh] font-black tracking-tighter mix-blend-multiply opacity-30 px-4">
                                             {text}
-                                        </h1>
-                                        <h1 className="gradient-text text-[13vh] font-black tracking-tighter mix-blend-multiply opacity-30 px-4">
+                                        </div>
+                                        <div className="gradient-text text-[13vh] font-black tracking-tighter mix-blend-multiply opacity-30 px-4">
                                             {text}
-                                        </h1>
+                                        </div>
                                     </div>
                                 ))}
                             </div>

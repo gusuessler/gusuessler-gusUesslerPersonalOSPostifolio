@@ -1,36 +1,85 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Gustavo Fermino Uessler
 
-## Getting Started
+> *Software engineer by trade. Systems thinker by obsession.*
+>
+> *This repository is not a product — it’s a process.*
 
-First, run the development server:
+---
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Why this exists
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Most personal websites try to _summarize_ a person.
+This one is trying to **observe** one.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+I don’t believe people are static objects that can be fully explained by a résumé, a tech stack, or a list of achievements. I believe we’re closer to evolving systems — influenced by code, culture, spirituality, mistakes, curiosity, and long walks where ideas suddenly connect.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is a digital space where those layers can coexist.
 
-## Learn More
+---
 
-To learn more about Next.js, take a look at the following resources:
+## Who I am (for now)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Based in **Blumenau, Brazil** (though I spent 8 transformative months living in Ireland).
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+I work with software because I like **making complex things usable**.
+I stay interested because I like **asking why things exist at all**.
 
-## Deploy on Vercel
+My background lives somewhere between:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+*   Engineering and systems design.
+*   Knowledge organization and teaching.
+*   A constant curiosity about how humans, tools, and meaning intersect.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+I enjoy structure — but only if it stays flexible.
+I enjoy abstraction — but only if it still touches reality.
+
+---
+
+## What you’ll eventually find here
+
+This repository (and the site it powers) is meant to grow into a personal operating system of sorts:
+
+*   ✍️ Essays and notes about technology, work, identity, and learning.
+*   🛠️ Projects, experiments, and half-finished ideas.
+*   🎨 Visual explorations, symbols, and interface concepts.
+*   🧭 Reflections on where I’ve been — and what I want to build next.
+
+*Some things will be polished.*
+*Some things will be rough.*
+*That’s intentional.*
+
+---
+
+## What this is *not*
+
+*   Not a portfolio pretending to be a person
+*   Not a blog chasing engagement
+*   Not a manifesto claiming certainty
+
+This is closer to a **workbench** than a showroom.
+
+---
+
+## A note to future me (and curious visitors)
+
+If you’re reading this later:
+
+> You’re allowed to contradict yourself.
+>
+> You’re allowed to delete things that no longer feel true.
+>
+> You’re allowed to rebuild this entire system if it stops serving you.
+
+**Growth beats consistency.**
+
+---
+
+## Status
+
+🚧 **Under construction** — permanently.
+
+If something here sparks a thought, a disagreement, or a collaboration idea, that’s already a success.
+
+---
+
+*Last updated when this version of me thought this made sense.*
