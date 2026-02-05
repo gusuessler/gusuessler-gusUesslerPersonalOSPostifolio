@@ -8,13 +8,15 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+
 export const metadata: Metadata = {
   title: "Uessler.com",
   description: "Portfolio operating system",
   icons: {
-    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/ufavicon.png`,
-    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/ufavicon.png`,
-    apple: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/ufavicon.png`,
+    icon: `${basePath}/icon.png`,
+    shortcut: `${basePath}/icon.png`,
+    apple: `${basePath}/icon.png`,
   },
 };
 
