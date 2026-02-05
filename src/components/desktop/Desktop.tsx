@@ -1784,7 +1784,7 @@ export default function Desktop() {
             {isBouncing && (
                 <img
                     ref={bounceElRef}
-                    src="/gustavouesslercnlogo.jpg"
+                    src={gustavoLogo.src}
                     alt="Bouncing Logo"
                     className="fixed h-14 w-auto z-[10005] cursor-pointer select-none left-0 top-0 will-change-transform shadow-2xl rounded-lg"
                     onClick={stopBouncing}
