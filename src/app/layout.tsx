@@ -8,15 +8,23 @@ const ibmPlexSans = IBM_Plex_Sans({
   weight: ["400", "500", "600", "700"],
 });
 
-const basePath = process.env.NEXT_PUBLIC_BASE_PATH || "";
+// Use the same logic as next.config.ts to determine basePath
+const isProd = process.env.NODE_ENV === "production";
+const repo = "gusuessler-gusUesslerPersonalOSPostifolio";
+const basePath = isProd ? `/${repo}` : "";
 
 export const metadata: Metadata = {
   title: "Uessler.com",
   description: "Portfolio operating system",
   icons: {
-    icon: `${basePath}/icon.png`,
-    shortcut: `${basePath}/icon.png`,
-    apple: `${basePath}/icon.png`,
+    icon: [
+      {
+        url: `${basePath}/Ufavicon.png`,
+        type: "image/png",
+      },
+    ],
+    shortcut: `${basePath}/Ufavicon.png`,
+    apple: `${basePath}/Ufavicon.png`,
   },
 };
 
