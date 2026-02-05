@@ -1,8 +1,6 @@
-
 "use client";
 
-import Image from "next/image";
-import { useState, useRef, useEffect } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import WeatherWidget from "./WeatherWidget";
 import ClockWidget from "./ClockWidget";
 
@@ -65,7 +63,7 @@ const APP_META: Record<AppId, { title: string; icon: React.ReactNode }> = {
         title: "Yuj Academy",
         icon: (
             <div className="w-10 h-10 flex items-center justify-center transform transition-transform active:scale-95 drop-shadow-md">
-                <img src="/logoTriad.png" alt="Yuj Academy" className="w-full h-full object-contain" />
+                <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logoTriad.png`} alt="Yuj Academy" className="w-full h-full object-contain" />
             </div>
         )
     },
@@ -167,15 +165,15 @@ function TerminalApp({ isDarkMode }: { isDarkMode: boolean }) {
                 setInput("");
                 return;
             default:
-                output = `Command not found: ${cmd} `;
+                output = `Command not found: ${cmd}`;
         }
 
-        setHistory([...history, `> ${input} `, output]);
+        setHistory([...history, `> ${input}`, output]);
         setInput("");
     }
 
     return (
-        <div className={`flex h - full flex - col p - 4 font - mono text - sm ${isDarkMode ? 'bg-[#1e1e1e] text-[#ce9178]' : 'bg-[#1e1e1e] text-[#ce9178]'} `}>
+        <div className={`flex h-full flex-col p-4 font-mono text-sm ${isDarkMode ? 'bg-[#1e1e1e] text-[#ce9178]' : 'bg-[#1e1e1e] text-[#ce9178]'}`}>
             <div className="flex-1 overflow-y-auto space-y-1">
                 {history.map((line, i) => (
                     <div key={i} className="whitespace-pre-wrap">{line}</div>
@@ -200,19 +198,19 @@ function TerminalApp({ isDarkMode }: { isDarkMode: boolean }) {
 /* --- Browser Component --- */
 function BrowserApp({ url, isDarkMode }: { url: string; isDarkMode: boolean }) {
     return (
-        <div className={`flex h - full flex - col ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'} `}>
-            <div className={`flex items - center gap - 2 border - b p - 2 text - sm ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-600'} `}>
+        <div className={`flex h-full flex-col ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'}`}>
+            <div className={`flex items-center gap-2 border-b p-2 text-sm ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700 text-gray-300' : 'bg-gray-50 border-gray-200 text-gray-600'}`}>
                 <div className="flex gap-1">
-                    <button className={`rounded px - 2 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'} `}>←</button>
-                    <button className={`rounded px - 2 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'} `}>→</button>
-                    <button className={`rounded px - 2 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'} `}>↻</button>
+                    <button className={`rounded px-2 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'}`}>←</button>
+                    <button className={`rounded px-2 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'}`}>→</button>
+                    <button className={`rounded px-2 ${isDarkMode ? 'hover:bg-gray-600' : 'hover:bg-gray-200'}`}>↻</button>
                 </div>
-                <div className={`flex - 1 rounded - md px - 3 py - 1 font - mono text - xs ${isDarkMode ? 'bg-[#1a1a1a] text-gray-300' : 'bg-gray-200 text-gray-600'} `}>{url || "about:blank"}</div>
+                <div className={`flex-1 rounded-md px-3 py-1 font-mono text-xs ${isDarkMode ? 'bg-[#1a1a1a] text-gray-300' : 'bg-gray-200 text-gray-600'}`}>{url || "about:blank"}</div>
             </div>
-            <div className={`flex - 1 flex items - center justify - center p - 8 text - center ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-gray-50'} `}>
+            <div className={`flex-1 flex items-center justify-center p-8 text-center ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-gray-50'}`}>
                 <div>
-                    <h3 className={`text - xl font - bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} `}>404 - Simulation Mode</h3>
-                    <p className={`mt - 2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} `}>This simulates a browser window for: <br /><span className="font-mono text-blue-600">{url}</span></p>
+                    <h3 className={`text-xl font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>404 - Simulation Mode</h3>
+                    <p className={`mt-2 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>This simulates a browser window for: <br /><span className="font-mono text-blue-600">{url}</span></p>
                     <p className="mt-4 text-xs text-gray-400">Implement an iframe here if you want real content.</p>
                 </div>
             </div>
@@ -232,17 +230,17 @@ function ContactApp({ isDarkMode }: { isDarkMode: boolean }) {
     };
 
     return (
-        <div className={`flex h - full items - center justify - center p - 8 ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'} `}>
+        <div className={`flex h-full items-center justify-center p-8 ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'}`}>
             <div className="max-w-md w-full">
-                <h3 className={`text - 2xl font - bold mb - 8 text - center ${isDarkMode ? 'text-gray-100' : 'text-gray-900'} `}>Get in touch</h3>
+                <h3 className={`text-2xl font-bold mb-8 text-center ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>Get in touch</h3>
 
                 <div className="space-y-6">
                     {/* Email - Copy Interaction */}
                     <button
                         onClick={handleCopyEmail}
-                        className={`flex items - center gap - 4 transition - all group w - full text - left ${isDarkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'} `}
+                        className={`flex items-center gap-4 transition-all group w-full text-left ${isDarkMode ? 'text-gray-300 hover:text-blue-400' : 'text-gray-700 hover:text-blue-600'}`}
                     >
-                        <div className={`p - 3 border rounded - xl transition - colors shadow - sm relative ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700 text-gray-400 group-hover:text-blue-400 group-hover:border-blue-800' : 'bg-white border-gray-200 text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200'} `}>
+                        <div className={`p-3 border rounded-xl transition-colors shadow-sm relative ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700 text-gray-400 group-hover:text-blue-400 group-hover:border-blue-800' : 'bg-white border-gray-200 text-gray-500 group-hover:text-blue-600 group-hover:border-blue-200'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="16" x="2" y="4" rx="2" /><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7" /></svg>
                             {/* Copied Feedback Popover */}
                             {copied && (
@@ -264,7 +262,7 @@ function ContactApp({ isDarkMode }: { isDarkMode: boolean }) {
                         rel="noopener noreferrer"
                         className="flex items-center gap-4 text-green-600 transition-all duration-200 group active:scale-105 origin-left"
                     >
-                        <div className={`p - 3 border rounded - xl transition - colors shadow - sm ${isDarkMode ? 'bg-green-900/20 border-green-800 text-green-500 group-hover:bg-green-900/30' : 'bg-green-50 border-green-200 text-green-600 group-hover:bg-green-100 group-active:bg-green-200 group-active:border-green-300'} `}>
+                        <div className={`p-3 border rounded-xl transition-colors shadow-sm ${isDarkMode ? 'bg-green-900/20 border-green-800 text-green-500 group-hover:bg-green-900/30' : 'bg-green-50 border-green-200 text-green-600 group-hover:bg-green-100 group-active:bg-green-200 group-active:border-green-300'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
                         </div>
                         <div className="group-hover:text-green-700 group-active:text-green-800 transition-colors">
@@ -280,7 +278,7 @@ function ContactApp({ isDarkMode }: { isDarkMode: boolean }) {
                         rel="noopener noreferrer"
                         className="flex items-center gap-4 text-pink-600 transition-all duration-200 group active:scale-105 origin-left"
                     >
-                        <div className={`p - 3 border rounded - xl transition - colors shadow - sm ${isDarkMode ? 'bg-pink-900/20 border-pink-800 text-pink-500 group-hover:bg-pink-900/30' : 'bg-pink-50 border-pink-200 text-pink-600 group-hover:bg-pink-100 group-active:bg-pink-200 group-active:border-pink-300'} `}>
+                        <div className={`p-3 border rounded-xl transition-colors shadow-sm ${isDarkMode ? 'bg-pink-900/20 border-pink-800 text-pink-500 group-hover:bg-pink-900/30' : 'bg-pink-50 border-pink-200 text-pink-600 group-hover:bg-pink-100 group-active:bg-pink-200 group-active:border-pink-300'}`}>
                             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5" /><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" /><line x1="17.5" x2="17.51" y1="6.5" y2="6.5" /></svg>
                         </div>
                         <div className="group-hover:text-pink-700 group-active:text-pink-800 transition-colors">
@@ -301,25 +299,25 @@ function TrashApp({ isDarkMode }: { isDarkMode: boolean }) {
     };
 
     return (
-        <div className={`flex h - full items - center justify - center p - 8 ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'} `}>
+        <div className={`flex h-full items-center justify-center p-8 ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-white'}`}>
             <div className="max-w-md w-full">
-                <h3 className={`text - 2xl font - bold mb - 8 text - center ${isDarkMode ? 'text-gray-100' : 'text-gray-900'} `}>🗑️ Trash</h3>
+                <h3 className={`text-2xl font-bold mb-8 text-center ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>🗑️ Trash</h3>
 
-                <div className={`rounded - lg border p - 6 shadow - sm ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'} `}>
-                    <p className={`text - sm mb - 4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} `}>1 item</p>
+                <div className={`rounded-lg border p-6 shadow-sm ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'}`}>
+                    <p className={`text-sm mb-4 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>1 item</p>
 
                     <button
                         onClick={handleSpicyClick}
                         className="w-full group cursor-pointer"
                     >
-                        <div className={`flex items - center gap - 4 p - 4 rounded - lg transition - colors ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'} `}>
+                        <div className={`flex items-center gap-4 p-4 rounded-lg transition-colors ${isDarkMode ? 'hover:bg-gray-700' : 'hover:bg-gray-50'}`}>
                             <div className="relative">
-                                <div className={`w - 16 h - 16 rounded - lg blur - md opacity - 60 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'} `}></div>
+                                <div className={`w-16 h-16 rounded-lg blur-md opacity-60 ${isDarkMode ? 'bg-gray-700' : 'bg-gray-200'}`}></div>
                                 <div className="absolute inset-0 flex items-center justify-center text-2xl">🌶️</div>
                             </div>
                             <div className="flex-1 text-left">
-                                <div className={`font - medium transition - colors ${isDarkMode ? 'text-gray-200 group-hover:text-blue-400' : 'text-gray-900 group-hover:text-blue-600'} `}>spicystuff.mp4</div>
-                                <div className={`text - xs mt - 1 ${isDarkMode ? 'text-gray-500' : 'text-gray-500'} `}>Click to open</div>
+                                <div className={`font-medium transition-colors ${isDarkMode ? 'text-gray-200 group-hover:text-blue-400' : 'text-gray-900 group-hover:text-blue-600'}`}>spicystuff.mp4</div>
+                                <div className={`text-xs mt-1 ${isDarkMode ? 'text-gray-500' : 'text-gray-500'}`}>Click to open</div>
                             </div>
                         </div>
                     </button>
@@ -334,7 +332,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
     switch (app) {
         case "yuj":
             return (
-                <div className={`flex h - full items - center justify - center text - 2xl font - bold font - sans ${isDarkMode ? 'text-white' : 'text-black'} `}>
+                <div className={`flex h-full items-center justify-center text-2xl font-bold font-sans ${isDarkMode ? 'text-white' : 'text-black'}`}>
                     Work in progress!
                 </div>
             );
@@ -342,21 +340,21 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
             return <BrowserApp url={data?.url} isDarkMode={isDarkMode} />;
         case "about":
             return (
-                <div className={`p - 8 md: p - 12 max - w - 4xl mx - auto space - y - 4 font - sans leading - relaxed selection: bg - yellow - 200 selection: text - black ${isDarkMode ? 'text-gray-300' : 'text-gray-800'} `}>
+                <div className={`p-8 md:p-12 max-w-4xl mx-auto space-y-4 font-sans leading-relaxed selection:bg-yellow-200 selection:text-black ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>
                     {/* Header */}
-                    <h1 className={`text - 4xl font - extrabold tracking - tight mb - 2 ${isDarkMode ? 'text-white' : 'text-black'} `}>Gustavo Fermino Uessler</h1>
+                    <h1 className={`text-4xl font-extrabold tracking-tight mb-2 ${isDarkMode ? 'text-white' : 'text-black'}`}>Gustavo Fermino Uessler</h1>
 
                     {/* Blockquote */}
-                    <div className={`border - l - 4 pl - 4 py - 1 my - 6 italic opacity - 80 ${isDarkMode ? 'border-blue-500 bg-blue-900/10' : 'border-blue-600 bg-blue-50'} `}>
+                    <div className={`border-l-4 pl-4 py-1 my-6 italic opacity-80 ${isDarkMode ? 'border-blue-500 bg-blue-900/10' : 'border-blue-600 bg-blue-50'}`}>
                         <p>Software engineer by trade. Systems thinker by obsession.</p>
                         <p>This repository is not a product — it’s a process.</p>
                     </div>
 
-                    <hr className={`my - 8 border - t - 2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 border-t-2 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     {/* Why this exists */}
                     <section>
-                        <h2 className={`text - 2xl font - bold mb - 4 pb - 2 border - b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'} `}>Why this exists</h2>
+                        <h2 className={`text-2xl font-bold mb-4 pb-2 border-b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'}`}>Why this exists</h2>
                         <p className="mb-4">
                             Most personal websites try to <em>summarize</em> a person. <br />
                             This one is trying to <strong>observe</strong> one.
@@ -368,11 +366,11 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         <p>This project is a digital space where those layers can coexist.</p>
                     </section>
 
-                    <hr className={`my - 8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     {/* Who I am */}
                     <section>
-                        <h2 className={`text - 2xl font - bold mb - 4 pb - 2 border - b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'} `}>Who I am (for now)</h2>
+                        <h2 className={`text-2xl font-bold mb-4 pb-2 border-b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'}`}>Who I am (for now)</h2>
                         <p className="mb-4">
                             Based in <strong>Blumenau, Brazil</strong> (though I spent 8 transformative months living in Ireland).
                         </p>
@@ -392,11 +390,11 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         </p>
                     </section>
 
-                    <hr className={`my - 8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     {/* What you'll find */}
                     <section>
-                        <h2 className={`text - 2xl font - bold mb - 4 pb - 2 border - b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'} `}>What you’ll eventually find here</h2>
+                        <h2 className={`text-2xl font-bold mb-4 pb-2 border-b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'}`}>What you’ll eventually find here</h2>
                         <p className="mb-4">This repository (and the site it powers) is meant to grow into a personal operating system of sorts:</p>
                         <ul className="list-none space-y-3 mb-6">
                             <li>✍️ Essays and notes about technology, work, identity, and learning.</li>
@@ -411,11 +409,11 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         </p>
                     </section>
 
-                    <hr className={`my - 8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     {/* What this is not */}
                     <section>
-                        <h2 className={`text - 2xl font - bold mb - 4 pb - 2 border - b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'} `}>What this is <em>not</em></h2>
+                        <h2 className={`text-2xl font-bold mb-4 pb-2 border-b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'}`}>What this is <em>not</em></h2>
                         <ul className="list-disc list-outside ml-6 space-y-2 mb-4">
                             <li>Not a portfolio pretending to be a person</li>
                             <li>Not a blog chasing engagement</li>
@@ -424,13 +422,13 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         <p className="font-medium">This is closer to a <strong>workbench</strong> than a showroom.</p>
                     </section>
 
-                    <hr className={`my - 8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     {/* Note to future me */}
                     <section>
-                        <h2 className={`text - 2xl font - bold mb - 4 pb - 2 border - b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'} `}>A note to future me (and curious visitors)</h2>
+                        <h2 className={`text-2xl font-bold mb-4 pb-2 border-b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'}`}>A note to future me (and curious visitors)</h2>
                         <p className="mb-4">If you’re reading this later:</p>
-                        <div className={`p - 4 rounded - lg border ${isDarkMode ? 'bg-amber-900/10 border-amber-800 text-amber-200' : 'bg-amber-50 border-amber-200 text-amber-800'} `}>
+                        <div className={`p-4 rounded-lg border ${isDarkMode ? 'bg-amber-900/10 border-amber-800 text-amber-200' : 'bg-amber-50 border-amber-200 text-amber-800'}`}>
                             <p>You’re allowed to contradict yourself.</p>
                             <p>You’re allowed to delete things that no longer feel true.</p>
                             <p>You’re allowed to rebuild this entire system if it stops serving you.</p>
@@ -438,16 +436,16 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         <p className="mt-4 font-bold text-lg">Growth beats consistency.</p>
                     </section>
 
-                    <hr className={`my - 8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     {/* Status */}
                     <section>
-                        <h2 className={`text - 2xl font - bold mb - 4 pb - 2 border - b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'} `}>Status</h2>
+                        <h2 className={`text-2xl font-bold mb-4 pb-2 border-b ${isDarkMode ? 'text-gray-100 border-gray-700' : 'text-gray-900 border-gray-200'}`}>Status</h2>
                         <p className="mb-4">🚧 <strong>Under construction</strong> — permanently.</p>
                         <p>If something here sparks a thought, a disagreement, or a collaboration idea, that’s already a success.</p>
                     </section>
 
-                    <hr className={`my - 8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'} `} />
+                    <hr className={`my-8 ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`} />
 
                     <p className="text-sm opacity-60 italic text-center">Last updated when this version of me thought this made sense.</p>
                 </div>
@@ -457,21 +455,21 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
         case "cv":
             return (
-                <div className={`mx - auto max - w - 5xl px - 12 py - 12 font - sans ${isDarkMode ? 'text-gray-200' : 'text-gray-800'} `}>
+                <div className={`mx-auto max-w-5xl px-12 py-12 font-sans ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                     {/* Header */}
-                    <div className={`mb - 12 flex items - end justify - between border - b pb - 6 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} `}>
+                    <div className={`mb-12 flex items-end justify-between border-b pb-6 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
                         <div className="flex items-center gap-8">
                             <img
-                                src="/facePic.jpg"
+                                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/facePic.jpg`}
                                 alt="Gustavo Fermino Uessler"
-                                className={`h - 28 w - 28 rounded - full border - 4 object - cover shadow - sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'} `}
+                                className={`h-28 w-28 rounded-full border-4 object-cover shadow-sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}
                             />
                             <div>
-                                <h2 className={`text - 4xl font - extrabold tracking - tight ${isDarkMode ? 'text-white' : 'text-black'} `}>Gustavo Fermino Uessler</h2>
-                                <p className={`mt - 2 text - lg font - medium text - left ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>Software Engineer/Developer/Programmer</p>
+                                <h2 className={`text-4xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-black'}`}>Gustavo Fermino Uessler</h2>
+                                <p className={`mt-2 text-lg font-medium text-left ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Software Engineer/Developer/Programmer</p>
                             </div>
                         </div>
-                        <button className={`rounded - full px - 6 py - 2.5 text - sm font - bold transition - transform hover: scale - 105 shadow - sm mb - 4 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'} `}>
+                        <button className={`rounded-full px-6 py-2.5 text-sm font-bold transition-transform hover:scale-105 shadow-sm mb-4 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
                             Download PDF
                         </button>
                     </div>
@@ -479,32 +477,32 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                     {/* Experience Section */}
                     <div className="mb-16">
                         <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Core Experience</h3>
-                        <div className={`relative border - l ml - 2 pl - 10 space - y - 12 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} `}>
+                        <div className={`relative border-l ml-2 pl-10 space-y-12 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
 
                             {/* SCI */}
                             <div className="relative">
-                                <div className={`absolute - left - [45px] top - 1.5 h - 4 w - 4 rounded - full ring - 4 ${isDarkMode ? 'bg-white ring-[#1a1a1a]' : 'bg-black ring-white'} `}></div>
+                                <div className={`absolute -left-[45px] top-1.5 h-4 w-4 rounded-full ring-4 ${isDarkMode ? 'bg-white ring-[#1a1a1a]' : 'bg-black ring-white'}`}></div>
                                 <div>
-                                    <h4 className={`text - xl font - bold ${isDarkMode ? 'text-white' : 'text-black'} `}>Software Developer</h4>
-                                    <div className={`text - md font - semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>SCI Sistemas Contábeis</div>
-                                    <p className={`text - sm mt - 1 mb - 4 font - mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} `}>Nov 2025 – Present | Blumenau, Brazil</p>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>SCI Sistemas Contábeis</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Nov 2025 – Present | Blumenau, Brazil</p>
                                 </div>
 
-                                <p className={`mb - 6 max - w - 2xl leading - relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>Working on accounting and fiscal systems used by real companies in production.</p>
+                                <p className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Working on accounting and fiscal systems used by real companies in production.</p>
 
                                 <div className="grid gap-6 md:grid-cols-2">
-                                    <div className={`p - 6 rounded - xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'} `}>
+                                    <div className={`p-6 rounded-xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
                                         <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">What I do</strong>
-                                        <ul className={`list - none space - y - 2 text - sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>
+                                        <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Develop & maintain critical accounting software</li>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Implement legal/fiscal requirements</li>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Legacy code refactoring & bug fixing</li>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Direct technical user support</li>
                                         </ul>
                                     </div>
-                                    <div className={`p - 6 rounded - xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'} `}>
+                                    <div className={`p-6 rounded-xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
                                         <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">What it represents</strong>
-                                        <ul className={`list - none space - y - 2 text - sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>
+                                        <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Deep responsibility & precision</li>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Complex domain rules mastery</li>
                                             <li className="flex gap-3"><span className="text-gray-300">•</span> Long-term system evolution</li>
@@ -515,19 +513,19 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
                             {/* Bremen */}
                             <div className="relative">
-                                <div className={`absolute - left - [44px] top - 2 h - 3 w - 3 rounded - full ring - 4 ${isDarkMode ? 'bg-gray-400 ring-[#1a1a1a]' : 'bg-gray-400 ring-white'} `}></div>
+                                <div className={`absolute -left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-400 ring-[#1a1a1a]' : 'bg-gray-400 ring-white'}`}></div>
                                 <div>
-                                    <h4 className={`text - xl font - bold ${isDarkMode ? 'text-white' : 'text-black'} `}>Software Developer (Contract)</h4>
-                                    <div className={`text - md font - semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>Bremen Sistemas</div>
-                                    <p className={`text - sm mt - 1 mb - 4 font - mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} `}>Aug 2023 – Nov 2025 | Blumenau, Brazil</p>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer (Contract)</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bremen Sistemas</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Aug 2023 – Nov 2025 | Blumenau, Brazil</p>
                                 </div>
-                                <p className={`mb - 6 max - w - 2xl leading - relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>Specialized Wingraph ERP development for the printing industry.</p>
+                                <p className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Specialized Wingraph ERP development for the printing industry.</p>
 
-                                <div className={`p - 6 rounded - xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'} `}>
+                                <div className={`p-6 rounded-xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
                                     <div className="grid md:grid-cols-2 gap-8">
                                         <div>
                                             <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">Contributions</strong>
-                                            <ul className={`list - none space - y - 2 text - sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>
+                                            <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                                 <li className="flex gap-3"><span className="text-gray-300">•</span> Feature planning & maintenance</li>
                                                 <li className="flex gap-3"><span className="text-gray-300">•</span> Delphi, MySQL, Git workflows</li>
                                                 <li className="flex gap-3"><span className="text-gray-300">•</span> ERP module validation</li>
@@ -535,7 +533,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                                         </div>
                                         <div>
                                             <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">Sharpened Skills</strong>
-                                            <ul className={`list - none space - y - 2 text - sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>
+                                            <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                                 <li className="flex gap-3"><span className="text-gray-300">•</span> Business process modeling</li>
                                                 <li className="flex gap-3"><span className="text-gray-300">•</span> Domain-specific software logic</li>
                                                 <li className="flex gap-3"><span className="text-gray-300">•</span> Legacy system respect</li>
@@ -547,32 +545,32 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
                             {/* Custom IT */}
                             <div className="relative">
-                                <div className={`absolute - left - [44px] top - 2 h - 3 w - 3 rounded - full ring - 4 ${isDarkMode ? 'bg-gray-500 ring-[#1a1a1a]' : 'bg-gray-300 ring-white'} `}></div>
+                                <div className={`absolute -left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-500 ring-[#1a1a1a]' : 'bg-gray-300 ring-white'}`}></div>
                                 <div>
-                                    <h4 className={`text - lg font - bold ${isDarkMode ? 'text-white' : 'text-gray-900'} `}>Junior Front-end Developer</h4>
-                                    <div className={`text - sm font - semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>Custom IT</div>
+                                    <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Junior Front-end Developer</h4>
+                                    <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Custom IT</div>
                                     <p className="text-xs text-gray-400 mt-1 font-mono">Nov 2018 – Feb 2019</p>
                                 </div>
-                                <p className={`mt - 2 text - sm max - w - xl ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>
+                                <p className={`mt-2 text-sm max-w-xl ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                                     Interface development (C#) & client interaction. Learned that UX problems are often communication problems.
                                 </p>
                             </div>
 
                             {/* Previous Roles Grouped */}
                             <div className="relative">
-                                <div className={`absolute - left - [44px] top - 2 h - 3 w - 3 rounded - full ring - 4 ${isDarkMode ? 'bg-gray-600 ring-[#1a1a1a]' : 'bg-gray-200 ring-white'} `}></div>
+                                <div className={`absolute -left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-600 ring-[#1a1a1a]' : 'bg-gray-200 ring-white'}`}></div>
                                 <div className="space-y-6">
                                     <div>
-                                        <h4 className={`text - lg font - bold ${isDarkMode ? 'text-white' : 'text-gray-900'} `}>SAP MM Support Agent</h4>
-                                        <div className={`text - sm font - semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>T-Systems</div>
+                                        <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SAP MM Support Agent</h4>
+                                        <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>T-Systems</div>
                                         <p className="text-xs text-gray-400 mt-1 font-mono">Sep 2017 – May 2018</p>
-                                        <p className={`mt - 2 text - sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>Enterprise support for international clients (English/German).</p>
+                                        <p className={`mt-2 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Enterprise support for international clients (English/German).</p>
                                     </div>
                                     <div>
-                                        <h4 className={`text - lg font - bold ${isDarkMode ? 'text-white' : 'text-gray-900'} `}>Junior Developer / Support</h4>
-                                        <div className={`text - sm font - semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>Eventials</div>
+                                        <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Junior Developer / Support</h4>
+                                        <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Eventials</div>
                                         <p className="text-xs text-gray-400 mt-1 font-mono">May 2017 – Sep 2017</p>
-                                        <p className={`mt - 2 text - sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>Full lifecycle exposure: Code, QA, and Support.</p>
+                                        <p className={`mt-2 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full lifecycle exposure: Code, QA, and Support.</p>
                                     </div>
                                 </div>
                             </div>
@@ -580,7 +578,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         </div>
                     </div>
 
-                    <hr className={`my - 12 ${isDarkMode ? 'border-gray-700' : 'border-gray-100'} `} />
+                    <hr className={`my-12 ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`} />
 
                     <div className="grid gap-16 md:grid-cols-2">
                         {/* Education */}
@@ -588,16 +586,16 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                             <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Education</h3>
                             <div className="space-y-8">
                                 <div className="group">
-                                    <h4 className={`text - lg font - bold border - l - 2 pl - 4 ${isDarkMode ? 'text-white border-white' : 'text-black border-black'} `}>IFSC – Instituto Federal de Santa Catarina</h4>
+                                    <h4 className={`text-lg font-bold border-l-2 pl-4 ${isDarkMode ? 'text-white border-white' : 'text-black border-black'}`}>IFSC – Instituto Federal de Santa Catarina</h4>
                                     <div className="pl-4 mt-1">
-                                        <div className={`text - sm font - medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'} `}>Information System Analysis and Development</div>
+                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>Information System Analysis and Development</div>
                                         <p className="text-xs text-gray-500 mt-1 font-mono">Feb 2017 – Oct 2020 | Technologist</p>
                                     </div>
                                 </div>
                                 <div className="group">
-                                    <h4 className={`text - lg font - bold border - l - 2 pl - 4 ${isDarkMode ? 'text-white border-gray-700' : 'text-gray-900 border-gray-200'} `}>SENAI/SC</h4>
+                                    <h4 className={`text-lg font-bold border-l-2 pl-4 ${isDarkMode ? 'text-white border-gray-700' : 'text-gray-900 border-gray-200'}`}>SENAI/SC</h4>
                                     <div className="pl-4 mt-1">
-                                        <div className={`text - sm font - medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'} `}>Curso Técnico Integrado, IT</div>
+                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>Curso Técnico Integrado, IT</div>
                                         <p className="text-xs text-gray-500 mt-1 font-mono">Feb 2015 – Oct 2016</p>
                                     </div>
                                 </div>
@@ -611,19 +609,19 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                                 <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Languages</h3>
                                 <div className="grid grid-cols-2 gap-y-4 gap-x-8">
                                     <div>
-                                        <div className={`text - sm font - bold ${isDarkMode ? 'text-white' : 'text-black'} `}>Portuguese</div>
+                                        <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Portuguese</div>
                                         <div className="text-xs text-gray-500">Native</div>
                                     </div>
                                     <div>
-                                        <div className={`text - sm font - bold ${isDarkMode ? 'text-white' : 'text-black'} `}>English</div>
+                                        <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>English</div>
                                         <div className="text-xs text-gray-500">Full Professional (C2)</div>
                                     </div>
                                     <div>
-                                        <div className={`text - sm font - medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>German</div>
+                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>German</div>
                                         <div className="text-xs text-gray-500">Elementary</div>
                                     </div>
                                     <div>
-                                        <div className={`text - sm font - medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>Spanish</div>
+                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Spanish</div>
                                         <div className="text-xs text-gray-500">Elementary</div>
                                     </div>
                                 </div>
@@ -632,11 +630,11 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                             {/* Certifications */}
                             <div>
                                 <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Certifications</h3>
-                                <div className={`flex items - start gap - 4 p - 4 border rounded - lg transition - colors ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700 hover:border-white' : 'bg-white border-gray-200 hover:border-black'} `}>
-                                    <div className={`h - 10 w - 10 flex items - center justify - center rounded font - bold text - xs shrink - 0 ${isDarkMode ? 'bg-white text-black' : 'bg-black text-white'} `}>AWS</div>
+                                <div className={`flex items-start gap-4 p-4 border rounded-lg transition-colors ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700 hover:border-white' : 'bg-white border-gray-200 hover:border-black'}`}>
+                                    <div className={`h-10 w-10 flex items-center justify-center rounded font-bold text-xs shrink-0 ${isDarkMode ? 'bg-white text-black' : 'bg-black text-white'}`}>AWS</div>
                                     <div>
-                                        <div className={`font - bold text - sm ${isDarkMode ? 'text-white' : 'text-black'} `}>AWS Certified Cloud Practitioner</div>
-                                        <div className={`text - xs mt - 1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'} `}>Amazon Web Services</div>
+                                        <div className={`font-bold text-sm ${isDarkMode ? 'text-white' : 'text-black'}`}>AWS Certified Cloud Practitioner</div>
+                                        <div className={`text-xs mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Amazon Web Services</div>
                                         <div className="text-[10px] text-gray-400 mt-2 font-mono uppercase">Expires Apr 2025</div>
                                     </div>
                                 </div>
@@ -673,13 +671,13 @@ function ActiveWindowsList({
     isDarkMode: boolean;
 }) {
     return (
-        <div className={`w - 72 rounded - md border shadow - xl backdrop - blur - sm transition - colors flex flex - col overflow - hidden h - full ${isDarkMode ? 'bg-[#2d2d2d]/95 border-gray-700' : 'bg-white/95 border-gray-200'} `}>
+        <div className={`w-72 rounded-md border shadow-xl backdrop-blur-sm transition-colors flex flex-col overflow-hidden h-full ${isDarkMode ? 'bg-[#2d2d2d]/95 border-gray-700' : 'bg-white/95 border-gray-200'}`}>
             {/* Header */}
-            <div className={`flex items - center justify - between p - 3 border - b ${isDarkMode ? 'border-gray-700' : 'border-gray-100'} `}>
-                <span className={`font - bold text - sm ${isDarkMode ? 'text-gray-100' : 'text-gray-900'} `}>Active windows</span>
+            <div className={`flex items-center justify-between p-3 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
+                <span className={`font-bold text-sm ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>Active windows</span>
                 <button
                     onClick={onCloseAll}
-                    className={`text - xs flex items - center gap - 1 transition - colors ${isDarkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-800'} `}
+                    className={`text-xs flex items-center gap-1 transition-colors ${isDarkMode ? 'text-gray-400 hover:text-gray-200' : 'text-gray-500 hover:text-gray-800'}`}
                 >
                     Close all <span className="text-[10px]">›</span>
                 </button>
@@ -688,7 +686,7 @@ function ActiveWindowsList({
             {/* List */}
             <div className="overflow-y-auto p-2 space-y-1 flex-1">
                 {wins.length === 0 ? (
-                    <div className={`flex flex - col items - center justify - center h - full text - center p - 8 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'} `}>
+                    <div className={`flex flex-col items-center justify-center h-full text-center p-8 ${isDarkMode ? 'text-gray-500' : 'text-gray-400'}`}>
                         <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" className="mb-3 opacity-50"><rect x="3" y="3" width="18" height="18" rx="2" ry="2" /><line x1="9" y1="3" x2="9" y2="21" /></svg>
                         <p className="text-sm font-medium">No active windows</p>
                         <p className="text-xs mt-1">Open an app to get started</p>
@@ -697,20 +695,20 @@ function ActiveWindowsList({
                     wins.map(win => (
                         <div
                             key={win.id}
-                            className={`group flex items - center justify - between p - 2 rounded - md cursor - pointer transition - all ${isDarkMode
+                            className={`group flex items-center justify-between p-2 rounded-md cursor-pointer transition-all ${isDarkMode
                                 ? `hover:bg-gray-700/50 ${!win.isMinimized ? 'bg-gray-700/30' : 'opacity-60 hover:opacity-100'}`
                                 : `hover:bg-gray-100 ${!win.isMinimized ? 'bg-gray-50' : 'opacity-60 hover:opacity-100'}`
-                                } `}
+                                }`}
                             onClick={() => onFocus(win.id)}
                         >
                             <div className="flex items-center gap-2 overflow-hidden">
                                 {/* Dot indicator for active state (or minimized state contrast) */}
-                                <div className={`w - 1.5 h - 1.5 rounded - full shrink - 0 transition - colors ${!win.isMinimized ? (isDarkMode ? 'bg-green-400' : 'bg-green-600') : 'bg-transparent border border-current opacity-40'} `} />
-                                <span className={`text - sm truncate select - none ${isDarkMode ? 'text-gray-200' : 'text-gray-700'} `}>{win.title}</span>
+                                <div className={`w-1.5 h-1.5 rounded-full shrink-0 transition-colors ${!win.isMinimized ? (isDarkMode ? 'bg-green-400' : 'bg-green-600') : 'bg-transparent border border-current opacity-40'}`} />
+                                <span className={`text-sm truncate select-none ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>{win.title}</span>
                             </div>
                             <button
                                 onClick={(e) => { e.stopPropagation(); onClose(win.id); }}
-                                className={`p - 1 rounded opacity - 0 group - hover: opacity - 100 transition - all ${isDarkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'} `}
+                                className={`p-1 rounded opacity-0 group-hover:opacity-100 transition-all ${isDarkMode ? 'hover:bg-gray-600 text-gray-400' : 'hover:bg-gray-200 text-gray-500'}`}
                             >
                                 <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
                             </button>
@@ -774,7 +772,7 @@ function Window({
         setAnimStyles({
             opacity: 0,
             transform: 'scale(0)',
-            transformOrigin: `${originX}px ${originY} px`,
+            transformOrigin: `${originX}px ${originY}px`,
             transition: 'none',
         });
 
@@ -785,7 +783,7 @@ function Window({
                 setAnimStyles({
                     opacity: 1,
                     transform: 'scale(1)',
-                    transformOrigin: `${originX}px ${originY} px`, // Keep origin stable during anim
+                    transformOrigin: `${originX}px ${originY}px`, // Keep origin stable during anim
                     transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out',
                 });
 
@@ -881,7 +879,7 @@ function Window({
                 setAnimStyles({
                     opacity: 0,
                     transform: 'scale(0.1)',
-                    transformOrigin: `${originX}px ${originY} px`,
+                    transformOrigin: `${originX}px ${originY}px`,
                     transition: 'transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.4s ease-out'
                 });
 
@@ -921,7 +919,7 @@ function Window({
                 setAnimStyles({
                     opacity: 0,
                     transform: 'scale(0.1)',
-                    transformOrigin: `${originX}px ${originY} px`,
+                    transformOrigin: `${originX}px ${originY}px`,
                     transition: 'none'
                 });
 
@@ -930,7 +928,7 @@ function Window({
                         setAnimStyles({
                             opacity: 1,
                             transform: 'scale(1)',
-                            transformOrigin: `${originX}px ${originY} px`,
+                            transformOrigin: `${originX}px ${originY}px`,
                             transition: 'transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease-out'
                         });
                         // Cleanup
@@ -968,8 +966,8 @@ function Window({
 
     return (
         <div
-            className={`${win.isMaximized ? 'fixed' : 'absolute'} flex flex - col overflow - hidden rounded - md border shadow - [0_8px_30px_rgb(0, 0, 0, 0.12)]
-        ${win.app === 'terminal' ? "bg-[#1e1e1e] border-gray-800" : isDarkMode ? "bg-[#2d2d2d] border-gray-700" : "bg-white border-gray-200"} `}
+            className={`${win.isMaximized ? 'fixed' : 'absolute'} flex flex-col overflow-hidden rounded-md border shadow-[0_8px_30px_rgb(0,0,0,0.12)]
+        ${win.app === 'terminal' ? "bg-[#1e1e1e] border-gray-800" : isDarkMode ? "bg-[#2d2d2d] border-gray-700" : "bg-white border-gray-200"}`}
             style={{
                 left: win.isMaximized ? 0 : win.x,
                 top: win.isMaximized ? 40 : win.y,
@@ -985,8 +983,8 @@ function Window({
         >
             {/* Minimalist Title Bar */}
             <div
-                className={`flex h - 9 shrink - 0 select - none items - center justify - center border - b px - 3 ${win.isMaximized ? 'cursor-default' : 'cursor-move'} relative
-          ${win.app === 'terminal' ? "bg-[#252526] border-black text-gray-400" : isDarkMode ? "bg-[#3d3d3d] border-gray-600 text-gray-300" : "bg-[#f5f5f5] border-gray-200 text-gray-500"} `}
+                className={`flex h-9 shrink-0 select-none items-center justify-center border-b px-3 ${win.isMaximized ? 'cursor-default' : 'cursor-move'} relative
+          ${win.app === 'terminal' ? "bg-[#252526] border-black text-gray-400" : isDarkMode ? "bg-[#3d3d3d] border-gray-600 text-gray-300" : "bg-[#f5f5f5] border-gray-200 text-gray-500"}`}
                 onMouseDown={onMouseDown}
             >
                 {/* Centered Title */}
@@ -998,23 +996,23 @@ function Window({
                 <div className="flex items-center gap-0.5 ml-auto">
                     <button
                         onClick={(e) => { e.stopPropagation(); onMinimize(); }}
-                        className={`flex h - 6 w - 6 items - center justify - center rounded transition - colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'} `}
+                        className={`flex h-6 w-6 items-center justify-center rounded transition-colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
                         title="Minimize"
                     >
-                        <div className={`h - [1.5px] w - 3 ${win.app === 'terminal' ? "bg-gray-400" : isDarkMode ? "bg-gray-300" : "bg-gray-600"} `} />
+                        <div className={`h-[1.5px] w-3 ${win.app === 'terminal' ? "bg-gray-400" : isDarkMode ? "bg-gray-300" : "bg-gray-600"}`} />
                     </button>
                     <button
-                        className={`flex h - 6 w - 6 items - center justify - center rounded transition - colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'} `}
+                        className={`flex h-6 w-6 items-center justify-center rounded transition-colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
                         onClick={(e) => { e.stopPropagation(); onMaximize(); }}
                         title="Maximize/Restore"
                     >
                         {win.isMaximized ? (
                             <div className="relative h-3 w-3">
-                                <div className={`absolute top - 0 right - 0 h - 2 w - 2 border - [1.5px] ${win.app === 'terminal' ? "border-gray-400 bg-[#252526]" : isDarkMode ? "border-gray-300 bg-[#3d3d3d]" : "border-gray-600 bg-[#f5f5f5]"} `} />
-                                <div className={`absolute bottom - 0 left - 0 h - 2 w - 2 border - [1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"} `} />
+                                <div className={`absolute top-0 right-0 h-2 w-2 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400 bg-[#252526]" : isDarkMode ? "border-gray-300 bg-[#3d3d3d]" : "border-gray-600 bg-[#f5f5f5]"}`} />
+                                <div className={`absolute bottom-0 left-0 h-2 w-2 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"}`} />
                             </div>
                         ) : (
-                            <div className={`h - 3 w - 3 border - [1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"} `} />
+                            <div className={`h-3 w-3 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"}`} />
                         )}
                     </button>
                     <button
@@ -1028,7 +1026,7 @@ function Window({
             </div>
 
             {/* Content */}
-            <div className={`flex - 1 overflow - auto ${win.app === 'terminal' ? "p-0" : "p-0"} `}>
+            <div className={`flex-1 overflow-auto ${win.app === 'terminal' ? "p-0" : "p-0"}`}>
                 <AppContent app={win.app} data={win.contentData} isDarkMode={isDarkMode} />
             </div>
 
@@ -1071,7 +1069,7 @@ function SubMenu({ items, onNavigate, isDarkMode }: { items: MenuItem[]; onNavig
     return (
         /* Wrapper with padding-left (pl-1) acts as an invisible bridge */
         <div className="absolute left-full top-[calc(0px-4px)] pl-2 w-48 animate-in fade-in zoom-in-95 duration-100 z-50">
-            <div className={`rounded - md border py - 1 shadow - lg ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'} `}>
+            <div className={`rounded-md border py-1 shadow-lg ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'}`}>
                 {items.map((item, i) => (
                     <MenuItemRow key={i} item={item} onNavigate={onNavigate} isDarkMode={isDarkMode} />
                 ))}
@@ -1093,7 +1091,7 @@ function MenuItemRow({ item, onNavigate, isDarkMode }: { item: MenuItem; onNavig
                 if (item.url) onNavigate(item.url);
             }}
         >
-            <div className={`flex cursor - pointer items - center justify - between rounded px - 3 py - 1.5 text - sm transition - colors ${isDarkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} ${isOpen ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-100') : ''} `}>
+            <div className={`flex cursor-pointer items-center justify-between rounded px-3 py-1.5 text-sm transition-colors ${isDarkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} ${isOpen ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-100') : ''}`}>
                 <div className="flex items-center gap-2">
                     {item.icon && <span>{item.icon}</span>}
                     <span>{item.label}</span>
@@ -1116,13 +1114,13 @@ function TopMenuItem({ item, onNavigate, isDarkMode }: { item: MenuItem; onNavig
                 if (item.url) onNavigate(item.url);
             }}
         >
-            <button className={`text - sm font - sans font - bold transition - colors ${isDarkMode ? 'text-gray-300 hover:text-gray-100' : 'text-gray-600 hover:text-black'} ${isOpen ? (isDarkMode ? 'text-gray-100' : 'text-black') : ''} `}>
+            <button className={`text-sm font-sans font-bold transition-colors ${isDarkMode ? 'text-gray-300 hover:text-gray-100' : 'text-gray-600 hover:text-black'} ${isOpen ? (isDarkMode ? 'text-gray-100' : 'text-black') : ''}`}>
                 {item.label}
             </button>
             {item.children && isOpen && (
                 /* Wrapper with padding-top (pt-2) acts as invisible bridge */
                 <div className="absolute left-0 top-full mt-1 w-48 animate-in fade-in zoom-in-95 duration-100 z-50">
-                    <div className={`rounded - md border py - 1 shadow - lg ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'} `}>
+                    <div className={`rounded-md border py-1 shadow-lg ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'}`}>
                         {item.children.map((child, i) => (
                             <MenuItemRow key={i} item={child} onNavigate={onNavigate} isDarkMode={isDarkMode} />
                         ))}
@@ -1427,19 +1425,19 @@ export default function Desktop() {
     }
 
     return (
-        <div className={`flex h - screen flex - col overflow - hidden text - sm ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-[#f0f0f0]'} `}>
+        <div className={`flex h-screen flex-col overflow-hidden text-sm ${isDarkMode ? 'bg-[#1a1a1a]' : 'bg-[#f0f0f0]'}`}>
             <style dangerouslySetInnerHTML={{
                 __html: `
-@keyframes marquee {
+                    @keyframes marquee {
                         from { transform: translateX(0); }
-                        to { transform: translateX(-50 %); }
-}
-                    .animate - marquee {
-    animation: marquee 60s linear infinite;
-}
-                    .animate - marquee - reverse {
-    animation: marquee 60s linear infinite reverse;
-}
+                        to { transform: translateX(-50%); }
+                    }
+                    .animate-marquee {
+                        animation: marquee 60s linear infinite;
+                    }
+                    .animate-marquee-reverse {
+                        animation: marquee 60s linear infinite reverse;
+                    }
                     
                     ${isDarkMode ? `
                     /* Dark mode scrollbar styles */
@@ -1466,11 +1464,10 @@ export default function Desktop() {
                     *::-webkit-scrollbar-thumb:hover {
                         background-color: #4a4a4a;
                     }
-                    ` : ''
-                    }
-`}} />
+                    ` : ''}
+                `}} />
             {/* 1. Top Bar: System Menu */}
-            <header className={`relative flex h - 10 shrink - 0 items - center justify - between border - b pl - 0 pr - 4 shadow - sm z - [10002] ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-[#e9e9e9] border-gray-300'} `}>
+            <header className={`relative flex h-10 shrink-0 items-center justify-between border-b pl-0 pr-4 shadow-sm z-[10002] ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-[#e9e9e9] border-gray-300'}`}>
                 <div className="flex h-full items-center gap-6">
                     <ClockWidget />
                     {/* Brazil Flag SVG - Windows safe */}
@@ -1500,16 +1497,7 @@ export default function Desktop() {
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </span>
-                        <div className="relative h-full w-auto aspect-square">
-                            <Image
-                                src="/GustavoUesslerCNlogo.jpg"
-                                alt="Gustavo Uessler"
-                                fill
-                                sizes="100px"
-                                className="object-cover"
-                                priority
-                            />
-                        </div>
+                        <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/GustavoUesslerCNlogo.jpg`} alt="Gustavo Uessler" className="h-full w-auto object-cover" />
                     </div>
                 )}
                 <div className="flex items-center gap-4 relative">
@@ -1517,16 +1505,16 @@ export default function Desktop() {
                     <button
                         ref={activeWindowsButtonRef}
                         onClick={() => setShowWindowList(!showWindowList)}
-                        className={`active - windows - toggle group relative flex items - center justify - center transition - all ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-200/50'} ${showWindowList ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-200') : ''} rounded - md p - 1.5`}
+                        className={`active-windows-toggle group relative flex items-center justify-center transition-all ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-200/50'} ${showWindowList ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-200') : ''} rounded-md p-1.5`}
                         title="Active Windows"
                     >
                         <div className="relative w-6 h-6 flex items-center justify-center">
                             {/* Box/Window Icon */}
-                            <div className={`absolute inset - 0 border - 2 rounded ${isDarkMode ? 'border-gray-400' : 'border-gray-600'} `}></div>
+                            <div className={`absolute inset-0 border-2 rounded ${isDarkMode ? 'border-gray-400' : 'border-gray-600'}`}></div>
                             {/* Title Bar Line */}
-                            <div className={`absolute top - [6px] left - 0 right - 0 h - [2px] ${isDarkMode ? 'bg-gray-400' : 'bg-gray-600'} `}></div>
+                            <div className={`absolute top-[6px] left-0 right-0 h-[2px] ${isDarkMode ? 'bg-gray-400' : 'bg-gray-600'}`}></div>
                             {/* Count in Center (below title bar) */}
-                            <span className={`relative top - [2px] text - [11px] font - bold font - sans ${isDarkMode ? 'text-gray-300' : 'text-gray-700'} `}>
+                            <span className={`relative top-[2px] text-[11px] font-bold font-sans ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                 {wins.length}
                             </span>
                         </div>
@@ -1537,12 +1525,10 @@ export default function Desktop() {
                         onClick={() => setShowUserMenu(!showUserMenu)}
                         className="relative"
                     >
-                        <Image
-                            src="/userImageCartoon.png"
+                        <img
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/userImageCartoon.png`}
                             alt="User Profile"
-                            width={32}
-                            height={32}
-                            className="rounded-full border-2 border-gray-300 hover:border-gray-400 transition-colors object-cover"
+                            className="h-8 w-8 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-colors object-cover"
                         />
                     </button>
 
@@ -1603,55 +1589,54 @@ export default function Desktop() {
             </header>
 
             {/* 2. Main Workspace */}
-            <div className={`flex flex - 1 overflow - hidden relative bg - [url('https://www.transparenttextures.com/patterns/graphy.png')] ${isDarkMode ? 'bg-gray-900/50' : 'bg-gray-50/50'} `} style={{ backgroundRepeat: 'round' }}>
+            <div className={`flex flex-1 overflow-hidden relative bg-[url('https://www.transparenttextures.com/patterns/graphy.png')] ${isDarkMode ? 'bg-gray-900/50' : 'bg-gray-50/50'}`} style={{ backgroundRepeat: 'round' }}>
 
                 {/* Background branding/illustration placeholder - Fixed position */}
-                <div className={`absolute inset - 0 flex flex - col pointer - events - none z - 0 overflow - hidden leading - none select - none`}>
+                <div className={`absolute inset-0 flex flex-col pointer-events-none z-0 overflow-hidden leading-none select-none`}>
                     <style dangerouslySetInnerHTML={{
                         __html: `
-@keyframes gradient - flow {
-    0 % { background- position: 0 % 50 %;
-}
-50 % { background- position: 100 % 50 %; }
-100 % { background- position: 0 % 50 %; }
+                        @keyframes gradient-flow {
+                            0% { background-position: 0% 50%; }
+                            50% { background-position: 100% 50%; }
+                            100% { background-position: 0% 50%; }
                         }
-@keyframes marquee {
+                        @keyframes marquee {
                             from { transform: translateX(0); }
-                            to { transform: translateX(-50 %); }
-}
-@keyframes marquee - vertical {
+                            to { transform: translateX(-50%); }
+                        }
+                        @keyframes marquee-vertical {
                             from { transform: translateY(0); }
-                            to { transform: translateY(-50 %); }
-}
-                        .animate - marquee {
-    animation: marquee 60s linear infinite;
-}
-                        .animate - marquee - reverse {
-    animation: marquee 60s linear infinite reverse;
-}
-                        .animate - marquee - vertical {
-    animation: marquee - vertical 40s linear infinite;
-}
-                        .gradient - text {
-    background: linear - gradient(
-        90deg,
-        ${isDarkMode ? '#000000' : '#f0f0f0'} 0 %,
-        ${isDarkMode ? '#050505' : '#d0d0d0'} 15 %,
-        ${isDarkMode ? '#0f0f0f' : '#b0b0b0'} 30 %,
-        ${isDarkMode ? '#8a8a8a' : '#909090'} 45 %,
-        ${isDarkMode ? '#ffffff' : '#808080'} 50 %,
-        ${isDarkMode ? '#8a8a8a' : '#909090'} 55 %,
-        ${isDarkMode ? '#0f0f0f' : '#b0b0b0'} 70 %,
-        ${isDarkMode ? '#050505' : '#d0d0d0'} 85 %,
-        ${isDarkMode ? '#000000' : '#f0f0f0'} 100 %
+                            to { transform: translateY(-50%); }
+                        }
+                        .animate-marquee {
+                            animation: marquee 60s linear infinite;
+                        }
+                        .animate-marquee-reverse {
+                            animation: marquee 60s linear infinite reverse;
+                        }
+                        .animate-marquee-vertical {
+                            animation: marquee-vertical 40s linear infinite;
+                        }
+                        .gradient-text {
+                            background: linear-gradient(
+                                90deg,
+                                ${isDarkMode ? '#000000' : '#f0f0f0'} 0%,
+                                ${isDarkMode ? '#050505' : '#d0d0d0'} 15%,
+                                ${isDarkMode ? '#0f0f0f' : '#b0b0b0'} 30%,
+                                ${isDarkMode ? '#8a8a8a' : '#909090'} 45%,
+                                ${isDarkMode ? '#ffffff' : '#808080'} 50%,
+                                ${isDarkMode ? '#8a8a8a' : '#909090'} 55%,
+                                ${isDarkMode ? '#0f0f0f' : '#b0b0b0'} 70%,
+                                ${isDarkMode ? '#050505' : '#d0d0d0'} 85%,
+                                ${isDarkMode ? '#000000' : '#f0f0f0'} 100%
                             );
-    background - size: 200 % 100 %;
-    -webkit - background - clip: text;
-    background - clip: text;
-    -webkit - text - fill - color: transparent;
-    animation: gradient - flow 8s ease infinite;
-}
-`}} />
+                            background-size: 200% 100%;
+                            -webkit-background-clip: text;
+                            background-clip: text;
+                            -webkit-text-fill-color: transparent;
+                            animation: gradient-flow 8s ease infinite;
+                        }
+                    `}} />
 
                     {/* Rolling Continuum Rows - Vertical & Horizontal */}
                     <div className="animate-marquee-vertical flex flex-col shrink-0">
@@ -1679,7 +1664,7 @@ export default function Desktop() {
                                     "UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO",
                                     "FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO FERMINO UESSLER GUSTAVO"
                                 ].map((text, i) => (
-                                    <div key={i} className={`flex whitespace - nowrap ${i % 2 === 0 ? 'animate-marquee' : 'animate-marquee-reverse'} `} style={{ animationDuration: `${25 + i * 2} s` }}>
+                                    <div key={i} className={`flex whitespace-nowrap ${i % 2 === 0 ? 'animate-marquee' : 'animate-marquee-reverse'}`} style={{ animationDuration: `${25 + i * 2}s` }}>
                                         <h1 className="gradient-text text-[13vh] font-black tracking-tighter mix-blend-multiply opacity-30 px-4">
                                             {text}
                                         </h1>
@@ -1701,7 +1686,7 @@ export default function Desktop() {
                             <div className="filter transition-transform duration-200">
                                 {APP_META[app].icon}
                             </div>
-                            <span className={`rounded px - 2 py - 0.5 text - [11px] font - medium transition - colors group - hover: shadow - sm ${isDarkMode ? 'text-gray-300 group-hover:bg-gray-700 group-hover:text-gray-100' : 'text-gray-700 group-hover:bg-[#f3f0e8] group-hover:text-gray-900'} `}>
+                            <span className={`rounded px-2 py-0.5 text-[11px] font-medium transition-colors group-hover:shadow-sm ${isDarkMode ? 'text-gray-300 group-hover:bg-gray-700 group-hover:text-gray-100' : 'text-gray-700 group-hover:bg-[#f3f0e8] group-hover:text-gray-900'}`}>
                                 {APP_META[app].title}
                             </span>
                         </button>
@@ -1742,7 +1727,7 @@ export default function Desktop() {
                             <div className="filter transition-transform duration-200">
                                 {APP_META[app].icon}
                             </div>
-                            <span className={`rounded px - 2 py - 0.5 text - [11px] font - medium transition - colors group - hover: shadow - sm ${isDarkMode ? 'text-gray-300 group-hover:bg-gray-700 group-hover:text-gray-100' : 'text-gray-700 group-hover:bg-[#f3f0e8] group-hover:text-gray-900'} `}>
+                            <span className={`rounded px-2 py-0.5 text-[11px] font-medium transition-colors group-hover:shadow-sm ${isDarkMode ? 'text-gray-300 group-hover:bg-gray-700 group-hover:text-gray-100' : 'text-gray-700 group-hover:bg-[#f3f0e8] group-hover:text-gray-900'}`}>
                                 {APP_META[app].title}
                             </span>
                         </button>
@@ -1750,7 +1735,7 @@ export default function Desktop() {
                 </aside>
 
                 {/* Active Windows Panel - Slide in Animation - Moved to root level for correct Z-index */}
-                <div className={`active - windows - panel absolute top - 4 right - 4 bottom - 4 z - [10000] pointer - events - auto transition - all duration - 300 ease -in -out ${showWindowList ? 'translate-x-0 visible' : 'translate-x-[120%] invisible'} `}>
+                <div className={`active-windows-panel absolute top-4 right-4 bottom-4 z-[10000] pointer-events-auto transition-all duration-300 ease-in-out ${showWindowList ? 'translate-x-0 visible' : 'translate-x-[120%] invisible'}`}>
                     <ActiveWindowsList
                         wins={wins}
                         onFocus={(id) => { focus(id); setShowWindowList(false); }}
@@ -1765,13 +1750,13 @@ export default function Desktop() {
             {/* Logout Confirmation Dialog */}
             {showLogoutDialog && (
                 <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-[10001]">
-                    <div className={`rounded - lg shadow - 2xl p - 6 max - w - md w - full mx - 4 ${isDarkMode ? 'bg-[#2d2d2d]' : 'bg-white'} `}>
-                        <h2 className={`text - xl font - bold mb - 4 ${isDarkMode ? 'text-gray-100' : 'text-gray-900'} `}>Confirm Logout</h2>
-                        <p className={`mb - 6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'} `}>Are you sure you want to log out?</p>
+                    <div className={`rounded-lg shadow-2xl p-6 max-w-md w-full mx-4 ${isDarkMode ? 'bg-[#2d2d2d]' : 'bg-white'}`}>
+                        <h2 className={`text-xl font-bold mb-4 ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>Confirm Logout</h2>
+                        <p className={`mb-6 ${isDarkMode ? 'text-gray-300' : 'text-gray-600'}`}>Are you sure you want to log out?</p>
                         <div className="flex gap-3 justify-end">
                             <button
                                 onClick={() => setShowLogoutDialog(false)}
-                                className={`px - 4 py - 2 rounded transition - colors ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'} `}
+                                className={`px-4 py-2 rounded transition-colors ${isDarkMode ? 'bg-gray-700 hover:bg-gray-600 text-gray-200' : 'bg-gray-200 hover:bg-gray-300 text-gray-800'}`}
                             >
                                 Cancel
                             </button>
@@ -1780,7 +1765,7 @@ export default function Desktop() {
                                     setShowLogoutDialog(false);
                                     setIsLoggedOut(true);
                                 }}
-                                className={`px - 4 py - 2 rounded transition - colors ${isDarkMode ? 'bg-red-700 hover:bg-red-600' : 'bg-red-600 hover:bg-red-700'} text - white`}
+                                className={`px-4 py-2 rounded transition-colors ${isDarkMode ? 'bg-red-700 hover:bg-red-600' : 'bg-red-600 hover:bg-red-700'} text-white`}
                             >
                                 Yes, Logout
                             </button>
