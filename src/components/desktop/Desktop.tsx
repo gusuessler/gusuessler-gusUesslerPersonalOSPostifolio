@@ -1493,7 +1493,7 @@ export default function Desktop() {
                 {/* Centered Logo */}
                 {!isBouncing && (
                     <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full py-0.5 cursor-pointer z-[10003]" onClick={startBouncing} title="Click for a surprise...">
-                        <span className={`absolute right - full top - 1 / 2 - translate - y - 1 / 2 mr - 3 font - bold font - sans ${isDarkMode ? 'text-white' : 'text-black'} flex items - center gap - 1 whitespace - nowrap`}>
+                        <span className={`absolute right-full top-1/2 -translate-y-1/2 mr-3 font-bold font-sans ${isDarkMode ? 'text-white' : 'text-black'} flex items-center gap-1 whitespace-nowrap`}>
                             Click me!
                             <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
                                 <line x1="5" y1="12" x2="19" y2="12"></line>
@@ -1553,17 +1553,17 @@ export default function Desktop() {
                                 className="fixed inset-0 z-40"
                                 onClick={() => setShowUserMenu(false)}
                             />
-                            <div className={`absolute right - 0 top - full mt - 2 w - 64 rounded - lg shadow - xl border z - 50 overflow - hidden ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'} `}>
-                                <div className={`p - 4 border - b ${isDarkMode ? 'border-gray-700' : 'border-gray-100'} `}>
-                                    <p className={`font - semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-900'} `}>Welcome, &lt;userName&gt;!</p>
-                                    <p className={`text - xs mt - 1 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'} `}>
+                            <div className={`absolute right-0 top-full mt-2 w-64 rounded-lg shadow-xl border z-50 overflow-hidden ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200'}`}>
+                                <div className={`p-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-100'}`}>
+                                    <p className={`font-semibold ${isDarkMode ? 'text-gray-100' : 'text-gray-900'}`}>Welcome, &lt;userName&gt;!</p>
+                                    <p className={`text-xs mt-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>
                                         Logged in since {formatLoginTime()} ago
                                     </p>
                                 </div>
                                 <div className="p-2">
                                     <button
                                         onClick={() => setIsDarkMode(!isDarkMode)}
-                                        className={`w - full px - 4 py - 2 text - left text - sm rounded transition - colors flex items - center justify - between ${isDarkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'} `}
+                                        className={`w-full px-4 py-2 text-left text-sm rounded transition-colors flex items-center justify-between ${isDarkMode ? 'text-gray-200 hover:bg-gray-700' : 'text-gray-700 hover:bg-gray-100'}`}
                                     >
                                         <span>{isDarkMode ? 'Dark Mode' : 'Light Mode'}</span>
                                         <span>
@@ -1591,7 +1591,7 @@ export default function Desktop() {
                                             setShowUserMenu(false);
                                             setShowLogoutDialog(true);
                                         }}
-                                        className={`w - full px - 4 py - 2 text - left text - sm rounded transition - colors ${isDarkMode ? 'text-red-400 hover:bg-red-900/20' : 'text-red-600 hover:bg-red-50'} `}
+                                        className={`w-full px-4 py-2 text-left text-sm rounded transition-colors ${isDarkMode ? 'text-red-400 hover:bg-red-900/20' : 'text-red-600 hover:bg-red-50'}`}
                                     >
                                         Logout
                                     </button>
