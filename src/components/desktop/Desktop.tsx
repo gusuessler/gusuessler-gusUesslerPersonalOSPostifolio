@@ -63,7 +63,7 @@ const APP_META: Record<AppId, { title: string; icon: React.ReactNode }> = {
         title: "Yuj Academy",
         icon: (
             <div className="w-10 h-10 flex items-center justify-center transform transition-transform active:scale-95 drop-shadow-md">
-                <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logoTriad.png`} alt="Yuj Academy" className="w-full h-full object-contain" />
+                <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/logotriad.png`} alt="Yuj Academy" className="w-full h-full object-contain" />
             </div>
         )
     },
@@ -460,7 +460,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                     <div className={`mb-12 flex items-end justify-between border-b pb-6 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
                         <div className="flex items-center gap-8">
                             <img
-                                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/facePic.jpg`}
+                                src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/facepic.jpg`}
                                 alt="Gustavo Fermino Uessler"
                                 className={`h-28 w-28 rounded-full border-4 object-cover shadow-sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}
                             />
@@ -1497,7 +1497,7 @@ export default function Desktop() {
                                 <polyline points="12 5 19 12 12 19"></polyline>
                             </svg>
                         </span>
-                        <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/GustavoUesslerCNlogo.jpg`} alt="Gustavo Uessler" className="h-full w-auto object-cover" />
+                        <img src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/gustavouesslercnlogo.jpg`} alt="Gustavo Uessler" className="h-full w-auto object-cover" />
                     </div>
                 )}
                 <div className="flex items-center gap-4 relative">
@@ -1526,7 +1526,7 @@ export default function Desktop() {
                         className="relative"
                     >
                         <img
-                            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/userImageCartoon.png`}
+                            src={`${process.env.NEXT_PUBLIC_BASE_PATH || ""}/userimagecartoon.png`}
                             alt="User Profile"
                             className="h-8 w-8 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-colors object-cover"
                         />
@@ -1778,7 +1778,7 @@ export default function Desktop() {
             {isBouncing && (
                 <img
                     ref={bounceElRef}
-                    src="/GustavoUesslerCNlogo.jpg"
+                    src="/gustavouesslercnlogo.jpg"
                     alt="Bouncing Logo"
                     className="fixed h-14 w-auto z-[10005] cursor-pointer select-none left-0 top-0 will-change-transform shadow-2xl rounded-lg"
                     onClick={stopBouncing}

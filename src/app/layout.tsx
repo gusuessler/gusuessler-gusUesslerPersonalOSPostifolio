@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: "Uessler.com",
   description: "Portfolio operating system",
   icons: {
-    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/Ufavicon.png`,
-    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/Ufavicon.png`,
-    apple: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/Ufavicon.png`,
+    icon: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/ufavicon.png`,
+    shortcut: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/ufavicon.png`,
+    apple: `${process.env.NEXT_PUBLIC_BASE_PATH || ""}/ufavicon.png`,
   },
 };
 
