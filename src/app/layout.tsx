@@ -9,6 +9,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://uessler.com"),
   title: "Uessler OS",
   description: "Uessler OS",
   openGraph: {
@@ -18,7 +19,7 @@ export const metadata: Metadata = {
     siteName: "Uessler OS",
     images: [
       {
-        url: `/Ufavicon.png`,
+        url: "/Ufavicon.png",
         width: 819,
         height: 816,
       },
@@ -30,7 +31,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Uessler OS",
     description: "Gustavo Uessler OS",
-    images: [`/Ufavicon.png`],
+    images: ["/Ufavicon.png"],
   },
 };
 
