@@ -9,7 +9,7 @@ const ibmPlexSans = IBM_Plex_Sans({
 });
 
 export const metadata: Metadata = {
-  title: "Gustavo Uessler | System Engineer",
+  title: "Uessler.com",
   description: "Portfolio operating system",
   icons: {
     icon: "/Ufavicon.png",
