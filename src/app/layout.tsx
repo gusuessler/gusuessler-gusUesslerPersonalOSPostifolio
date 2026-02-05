@@ -12,9 +12,9 @@ export const metadata: Metadata = {
   title: "Uessler.com",
   description: "Portfolio operating system",
   icons: {
-    icon: process.env.NODE_ENV === 'production' ? "/gusuessler-gusUesslerPersonalOSPostifolio/Ufavicon.png" : "/Ufavicon.png",
-    shortcut: process.env.NODE_ENV === 'production' ? "/gusuessler-gusUesslerPersonalOSPostifolio/Ufavicon.png" : "/Ufavicon.png",
-    apple: process.env.NODE_ENV === 'production' ? "/gusuessler-gusUesslerPersonalOSPostifolio/Ufavicon.png" : "/Ufavicon.png",
+    icon: "/Ufavicon.png",
+    shortcut: "/Ufavicon.png",
+    apple: "/Ufavicon.png",
   },
 };
 
