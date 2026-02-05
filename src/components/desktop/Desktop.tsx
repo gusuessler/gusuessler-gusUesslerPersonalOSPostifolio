@@ -1159,7 +1159,7 @@ export default function Desktop() {
 
     const [isBouncing, setIsBouncing] = useState(false);
     const bounceRef = useRef({ x: 0, y: 0, dx: 0, dy: 0, colorIdx: 0 });
-    const requestRef = useRef<number>();
+    const requestRef = useRef<number | undefined>(undefined);
 
     const startBouncing = () => {
         const startX = window.innerWidth / 2 - 60;
