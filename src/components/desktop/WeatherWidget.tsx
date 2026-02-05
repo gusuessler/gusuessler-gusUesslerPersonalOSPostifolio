@@ -2,23 +2,27 @@ import React, { useState, useEffect } from "react";
 
 export default function WeatherWidget({ isDarkMode }: { isDarkMode: boolean }) {
     const [weather, setWeather] = useState<{ temp: number; code: number; precip: number } | null>(null);
+    const [locationName, setLocationName] = useState("Blumenau");
 
     useEffect(() => {
-        async function fetchWeather() {
+        // Defaults (Blumenau, SC)
+        const defaultLat = -26.9194;
+        const defaultLon = -49.0661;
+
+        async function fetchWeather(lat: number, lon: number) {
             try {
-                // Blumenau, SC coordinates: -26.9194, -49.0661
-                // Added daily precipitation probability
-                const res = await fetch(
-                    "https://api.open-meteo.com/v1/forecast?latitude=-26.9194&longitude=-49.0661&current_weather=true&daily=precipitation_probability_max&timezone=America%2FSao_Paulo"
+                // Fetch weather
+                const weatherRes = await fetch(
+                    `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=precipitation_probability_max&timezone=auto`
                 );
-                const data = await res.json();
+                const weatherData = await weatherRes.json();
 
                 // Get today's max precip probability
-                const precip = data.daily?.precipitation_probability_max?.[0] ?? 0;
+                const precip = weatherData.daily?.precipitation_probability_max?.[0] ?? 0;
 
                 setWeather({
-                    temp: data.current_weather.temperature,
-                    code: data.current_weather.weathercode,
+                    temp: weatherData.current_weather.temperature,
+                    code: weatherData.current_weather.weathercode,
                     precip,
                 });
             } catch (e) {
@@ -26,9 +30,43 @@ export default function WeatherWidget({ isDarkMode }: { isDarkMode: boolean }) {
             }
         }
 
-        fetchWeather();
-        // Refresh every 30 mins
-        const interval = setInterval(fetchWeather, 30 * 60 * 1000);
+        async function fetchCity(lat: number, lon: number) {
+            try {
+                // Free reverse geocoding (no key required for basic usage)
+                const res = await fetch(
+                    `https://api.bigdatacloud.net/data/reverse-geocode-client?latitude=${lat}&longitude=${lon}&localityLanguage=en`
+                );
+                const data = await res.json();
+                if (data.city || data.locality) {
+                    setLocationName(data.city || data.locality);
+                }
+            } catch (e) {
+                console.error("Failed to fetch city name", e);
+            }
+        }
+
+        function initialize() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(
+                    (position) => {
+                        const { latitude, longitude } = position.coords;
+                        fetchWeather(latitude, longitude);
+                        fetchCity(latitude, longitude);
+                    },
+                    (error) => {
+                        console.warn("Geolocation denied or error, using default", error);
+                        fetchWeather(defaultLat, defaultLon);
+                    }
+                );
+            } else {
+                fetchWeather(defaultLat, defaultLon);
+            }
+        }
+
+        initialize();
+
+        // Refresh weather every 30 mins
+        const interval = setInterval(initialize, 30 * 60 * 1000);
         return () => clearInterval(interval);
     }, []);
 
@@ -99,12 +137,12 @@ export default function WeatherWidget({ isDarkMode }: { isDarkMode: boolean }) {
     }
 
     return (
-        <div className={`flex items-center gap-2 select-none hover:opacity-80 transition-opacity cursor-default font-sans font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`} title={`Blumenau, SC - ${label}`}>
+        <div className={`flex items-center gap-2 select-none hover:opacity-80 transition-opacity cursor-default font-sans font-bold ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`} title={`${locationName} - ${label}`}>
             {icon}
             <div className="flex flex-col leading-none justify-center">
                 <span className="font-bold text-sm">{Math.round(temp)}°C</span>
                 <span className="text-[10px] opacity-70 flex items-center gap-1">
-                    <span>Blumenau</span>
+                    <span className="max-w-[80px] truncate">{locationName}</span>
                     {precip > 0 && (
                         <>
                             <span>•</span>
