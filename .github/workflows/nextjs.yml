@@ -47,7 +47,7 @@ jobs:
           else
             echo "Unable to determine package manager"
             exit 1
-          fi
+              
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
@@ -74,6 +74,8 @@ jobs:
       - name: Install dependencies
         run: ${{ steps.detect-package-manager.outputs.manager }} ${{ steps.detect-package-manager.outputs.command }}
       - name: Build with Next.js
+        env:
+          NEXT_PUBLIC_GOOGLE_ANALYTICS_ID: "G-R0EHJWKSWZ"
         run: ${{ steps.detect-package-manager.outputs.runner }} next build
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

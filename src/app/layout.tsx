@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { IBM_Plex_Sans } from "next/font/google";
+import GoogleAnalytics from "@/components/GoogleAnalytics";
 import "./globals.css";
 
 const ibmPlexSans = IBM_Plex_Sans({
@@ -51,6 +52,7 @@ export default function RootLayout({
       <body
         className={`${ibmPlexSans.variable} font-sans antialiased`}
       >
+        <GoogleAnalytics gaId={process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS_ID} />
         {children}
       </body>
     </html>
