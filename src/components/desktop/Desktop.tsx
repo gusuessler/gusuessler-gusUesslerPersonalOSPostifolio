@@ -143,10 +143,16 @@ function TerminalApp({ isDarkMode }: { isDarkMode: boolean }) {
     const [history, setHistory] = useState<string[]>(["Welcome to the system v1.0", "Type 'help' for commands."]);
     const [input, setInput] = useState("");
     const endRef = useRef<HTMLDivElement>(null);
+    // Focus input on mount and click
+    const inputRef = useRef<HTMLInputElement>(null);
 
     useEffect(() => {
         endRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [history]);
+
+    const focusInput = () => {
+        inputRef.current?.focus();
+    };
 
     function handleCommand(e: React.FormEvent) {
         e.preventDefault();
@@ -180,16 +186,20 @@ function TerminalApp({ isDarkMode }: { isDarkMode: boolean }) {
     }
 
     return (
-        <div className={`flex h-full flex-col p-4 font-mono text-sm ${isDarkMode ? 'bg-[#1e1e1e] text-[#ce9178]' : 'bg-[#1e1e1e] text-[#ce9178]'}`}>
+        <div
+            className={`flex h-full flex-col p-4 font-mono text-sm ${isDarkMode ? 'bg-[#1e1e1e] text-[#ce9178]' : 'bg-[#1e1e1e] text-[#ce9178]'}`}
+            onClick={focusInput}
+        >
             <div className="flex-1 overflow-y-auto space-y-1">
                 {history.map((line, i) => (
                     <div key={i} className="whitespace-pre-wrap">{line}</div>
                 ))}
                 <div ref={endRef} />
             </div>
-            <form onSubmit={handleCommand} className="mt-2 flex items-center border-t border-white/10 pt-2">
+            <form onSubmit={handleCommand} className="mt-2 flex items-center border-t border-white/10 pt-2 float-end">
                 <span className="mr-2 text-blue-400">$</span>
                 <input
+                    ref={inputRef}
                     className="flex-1 bg-transparent text-[#d4d4d4] outline-none placeholder:text-gray-600"
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
@@ -738,6 +748,7 @@ function Window({
     onResize,
     getMinimizedTarget,
     isDarkMode,
+    isMobile,
 }: {
     win: WindowState;
     onFocus: () => void;
@@ -748,6 +759,7 @@ function Window({
     onResize: (dw: number, dh: number, direction: 'corner' | 'right' | 'bottom' | 'left') => void;
     getMinimizedTarget?: () => DOMRect | undefined;
     isDarkMode: boolean;
+    isMobile: boolean;
 }) {
     const [dragging, setDragging] = useState(false);
     const [resizing, setResizing] = useState(false);
@@ -971,28 +983,37 @@ function Window({
     // Check if minimized (after animation checks)
     if (win.isMinimized && renderMinimized) return null;
 
+    // Mobile overrides
+    const actualX = isMobile ? 0 : (win.isMaximized ? 0 : win.x);
+    const actualY = isMobile ? 40 : (win.isMaximized ? 40 : win.y);
+    const actualWidth = isMobile ? "100vw" : (win.isMaximized ? "100vw" : (win.width ?? defaultWidth));
+    const actualHeight = isMobile ? "calc(100vh - 40px)" : (win.isMaximized ? "calc(100vh - 40px)" : (win.height ?? defaultHeight));
+
+    // Disable dragging on mobile or maximized
+    const canDrag = !isMobile && !win.isMaximized;
+
     return (
         <div
-            className={`${win.isMaximized ? 'fixed' : 'absolute'} flex flex-col overflow-hidden rounded-md border shadow-[0_8px_30px_rgb(0,0,0,0.12)]
+            className={`${(win.isMaximized || isMobile) ? 'fixed' : 'absolute'} flex flex-col overflow-hidden rounded-md border shadow-[0_8px_30px_rgb(0,0,0,0.12)]
         ${win.app === 'terminal' ? "bg-[#1e1e1e] border-gray-800" : isDarkMode ? "bg-[#2d2d2d] border-gray-700" : "bg-white border-gray-200"}`}
             style={{
-                left: win.isMaximized ? 0 : win.x,
-                top: win.isMaximized ? 40 : win.y,
-                width: win.isMaximized ? "100vw" : (win.width ?? defaultWidth),
-                height: win.isMaximized ? "calc(100vh - 40px)" : (win.height ?? defaultHeight),
+                left: actualX,
+                top: actualY,
+                width: actualWidth,
+                height: actualHeight,
                 zIndex: win.z,
                 willChange: dragging ? 'left, top' : 'auto',
                 transition: dragging ? 'none' : 'box-shadow 0.3s',
                 // Don't apply animStyles when maximized to avoid transform creating stacking context
-                ...(win.isMaximized ? {} : (animStyles || {}))
+                ...((win.isMaximized || isMobile) ? {} : (animStyles || {}))
             }}
             onMouseDown={onFocus}
         >
             {/* Minimalist Title Bar */}
             <div
-                className={`flex h-9 shrink-0 select-none items-center justify-center border-b px-3 ${win.isMaximized ? 'cursor-default' : 'cursor-move'} relative
+                className={`flex h-9 shrink-0 select-none items-center justify-center border-b px-3 ${!canDrag ? 'cursor-default' : 'cursor-move'} relative
           ${win.app === 'terminal' ? "bg-[#252526] border-black text-gray-400" : isDarkMode ? "bg-[#3d3d3d] border-gray-600 text-gray-300" : "bg-[#f5f5f5] border-gray-200 text-gray-500"}`}
-                onMouseDown={onMouseDown}
+                onMouseDown={canDrag ? onMouseDown : undefined}
             >
                 {/* Centered Title */}
                 <div className="absolute left-1/2 -translate-x-1/2 flex items-center gap-2 pointer-events-none">
@@ -1001,27 +1022,31 @@ function Window({
 
                 {/* Minimal Controls: _ □ X - Positioned on the right */}
                 <div className="flex items-center gap-0.5 ml-auto">
-                    <button
-                        onClick={(e) => { e.stopPropagation(); onMinimize(); }}
-                        className={`flex h-6 w-6 items-center justify-center rounded transition-colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
-                        title="Minimize"
-                    >
-                        <div className={`h-[1.5px] w-3 ${win.app === 'terminal' ? "bg-gray-400" : isDarkMode ? "bg-gray-300" : "bg-gray-600"}`} />
-                    </button>
-                    <button
-                        className={`flex h-6 w-6 items-center justify-center rounded transition-colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
-                        onClick={(e) => { e.stopPropagation(); onMaximize(); }}
-                        title="Maximize/Restore"
-                    >
-                        {win.isMaximized ? (
-                            <div className="relative h-3 w-3">
-                                <div className={`absolute top-0 right-0 h-2 w-2 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400 bg-[#252526]" : isDarkMode ? "border-gray-300 bg-[#3d3d3d]" : "border-gray-600 bg-[#f5f5f5]"}`} />
-                                <div className={`absolute bottom-0 left-0 h-2 w-2 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"}`} />
-                            </div>
-                        ) : (
-                            <div className={`h-3 w-3 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"}`} />
-                        )}
-                    </button>
+                    {!isMobile && (
+                        <>
+                            <button
+                                onClick={(e) => { e.stopPropagation(); onMinimize(); }}
+                                className={`flex h-6 w-6 items-center justify-center rounded transition-colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
+                                title="Minimize"
+                            >
+                                <div className={`h-[1.5px] w-3 ${win.app === 'terminal' ? "bg-gray-400" : isDarkMode ? "bg-gray-300" : "bg-gray-600"}`} />
+                            </button>
+                            <button
+                                className={`flex h-6 w-6 items-center justify-center rounded transition-colors ${isDarkMode && win.app !== 'terminal' ? 'hover:bg-white/10' : 'hover:bg-black/5'}`}
+                                onClick={(e) => { e.stopPropagation(); onMaximize(); }}
+                                title="Maximize/Restore"
+                            >
+                                {win.isMaximized ? (
+                                    <div className="relative h-3 w-3">
+                                        <div className={`absolute top-0 right-0 h-2 w-2 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400 bg-[#252526]" : isDarkMode ? "border-gray-300 bg-[#3d3d3d]" : "border-gray-600 bg-[#f5f5f5]"}`} />
+                                        <div className={`absolute bottom-0 left-0 h-2 w-2 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"}`} />
+                                    </div>
+                                ) : (
+                                    <div className={`h-3 w-3 border-[1.5px] ${win.app === 'terminal' ? "border-gray-400" : isDarkMode ? "border-gray-300" : "border-gray-600"}`} />
+                                )}
+                            </button>
+                        </>
+                    )}
                     <button
                         className="flex h-6 w-6 items-center justify-center rounded hover:bg-red-500 hover:text-white transition-colors"
                         onClick={(e) => { e.stopPropagation(); onClose(); }}
@@ -1038,7 +1063,7 @@ function Window({
             </div>
 
             {/* Resize Handles */}
-            {!win.isMaximized && (
+            {(!win.isMaximized && !isMobile) && (
                 <>
                     {/* Left Edge - Horizontal Resize */}
                     <div
@@ -1138,7 +1163,20 @@ function TopMenuItem({ item, onNavigate, isDarkMode }: { item: MenuItem; onNavig
     );
 }
 
+// Hook to check for mobile device
+function useIsMobile() {
+    const [isMobile, setIsMobile] = useState(false);
+    useEffect(() => {
+        const check = () => setIsMobile(window.innerWidth < 768);
+        check();
+        window.addEventListener('resize', check);
+        return () => window.removeEventListener('resize', check);
+    }, []);
+    return isMobile;
+}
+
 export default function Desktop() {
+    const isMobile = useIsMobile();
     const [zTop, setZTop] = useState(100);
     const [wins, setWins] = useState<WindowState[]>([
         { id: "w1", app: "about", title: APP_META.about.title, x: 100, y: 50, z: 100, width: 800, height: 600 },
@@ -1476,9 +1514,11 @@ export default function Desktop() {
             {/* 1. Top Bar: System Menu */}
             <header className={`relative flex h-10 shrink-0 items-center justify-between border-b pl-0 pr-4 shadow-sm z-[10002] ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-[#e9e9e9] border-gray-300'}`}>
                 <div className="flex h-full items-center gap-6">
-                    <ClockWidget />
+                    <div className="hidden md:block">
+                        <ClockWidget />
+                    </div>
                     {/* Brazil Flag SVG - Windows safe */}
-                    <a href="https://en.wikipedia.org/wiki/Brazil" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity" title="Brazil - Wikipedia">
+                    <a href="https://en.wikipedia.org/wiki/Brazil" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity hidden md:block" title="Brazil - Wikipedia">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" className="w-6 h-auto shadow-sm rounded-[1px]">
                             <rect width="1000" height="700" fill="#009b3a" />
                             <path d="M500 127L873 350 500 573 127 350z" fill="#fedf00" />
@@ -1486,7 +1526,9 @@ export default function Desktop() {
                             <path d="M370 410c50-40 130-50 260 0" stroke="#fff" strokeWidth="30" fill="none" />
                         </svg>
                     </a>
-                    <WeatherWidget isDarkMode={isDarkMode} />
+                    <div className="hidden md:block">
+                        <WeatherWidget isDarkMode={isDarkMode} />
+                    </div>
                     <nav className="flex gap-4">
                         {MENU_DATA.map((item, i) => (
                             <TopMenuItem key={i} item={item} onNavigate={(url) => handleMenuNavigate(url)} isDarkMode={isDarkMode} />
@@ -1512,7 +1554,7 @@ export default function Desktop() {
                     <button
                         ref={activeWindowsButtonRef}
                         onClick={() => setShowWindowList(!showWindowList)}
-                        className={`active-windows-toggle group relative flex items-center justify-center transition-all ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-200/50'} ${showWindowList ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-200') : ''} rounded-md p-1.5`}
+                        className={`active-windows-toggle group relative flex items-center justify-center transition-all ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-200/50'} ${showWindowList ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-200') : ''} rounded-md p-1.5 hidden md:flex`}
                         title="Active Windows"
                     >
                         <div className="relative w-6 h-6 flex items-center justify-center">
@@ -1687,7 +1729,7 @@ export default function Desktop() {
                 </div>
 
                 {/* Left Sidebar - Transparent */}
-                <aside className="flex w-24 flex-col items-center gap-7 py-6 z-40 relative">
+                <aside className="hidden md:flex w-24 flex-col items-center gap-7 py-6 z-40 relative">
                     {leftApps.map(app => (
                         <button key={app} onClick={(e) => openApp(app, undefined, e.currentTarget.getBoundingClientRect())} className="group flex flex-col items-center gap-1 w-full">
                             <div className="filter transition-transform duration-200">
@@ -1705,6 +1747,24 @@ export default function Desktop() {
                 {/* Center: Desktop Surface (Windows Layer) */}
                 <main ref={mainRef} className="relative flex-1 pointer-events-none">
                     <div className="absolute inset-0 pointer-events-auto">
+                        {/* Mobile Icon Grid */}
+                        <div className={`md:hidden absolute inset-0 grid grid-cols-3 grid-rows-4 p-8 gap-4 justify-items-center content-center z-10`}>
+                            {[...leftApps, ...rightApps].map(app => (
+                                <button
+                                    key={app}
+                                    onClick={(e) => openApp(app, undefined, e.currentTarget.getBoundingClientRect())}
+                                    className="group flex flex-col items-center gap-2 justify-center w-24 h-24 active:scale-95 transition-transform"
+                                >
+                                    <div className="transform scale-125">
+                                        {APP_META[app].icon}
+                                    </div>
+                                    <span className={`rounded px-2 py-1 text-xs font-bold transition-colors shadow-sm bg-black/10 backdrop-blur-sm ${isDarkMode ? 'text-white' : 'text-black'}`}>
+                                        {APP_META[app].title}
+                                    </span>
+                                </button>
+                            ))}
+                        </div>
+
                         {wins.map((win) => (
                             <Window
                                 key={win.id}
@@ -1717,14 +1777,14 @@ export default function Desktop() {
                                 onResize={(dw, dh, direction) => resize(win.id, dw, dh, direction)}
                                 getMinimizedTarget={() => activeWindowsButtonRef.current?.getBoundingClientRect()}
                                 isDarkMode={isDarkMode}
+                                isMobile={isMobile}
                             />
                         ))}
                     </div>
 
                 </main>
 
-                {/* Right Sidebar - Transparent */}
-                <aside className="flex w-24 flex-col items-center gap-7 py-6 z-40 relative">
+                <aside className="hidden md:flex w-24 flex-col items-center gap-7 py-6 z-40 relative">
                     {rightApps.map(app => (
                         <button
                             key={app}
