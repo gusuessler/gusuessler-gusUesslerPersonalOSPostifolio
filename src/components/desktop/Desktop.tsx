@@ -7,11 +7,11 @@ import ClockWidget from "./ClockWidget";
 // Images
 
 import gustavoLogo from "@/assets/GustavoUesslerCNlogo.jpg";
-import userImage from "@/assets/userImageCartoon.png";
+import userImage from "@/assets/userImageDefault.jpg";
 import facePic from "@/assets/facePic.jpg";
 import logoTriad from "@/assets/logoTriad.png";
 
-type AppId = "about" | "cv" | "contact" | "terminal" | "browser" | "trash" | "yuj";
+type AppId = "about" | "cv" | "contact" | "terminal" | "browser" | "trash" | "yuj" | "taxometer";
 
 type WindowState = {
     id: string;
@@ -78,6 +78,10 @@ const APP_META: Record<AppId, { title: string; icon: React.ReactNode }> = {
         title: "Trash",
         icon: <span className="text-4xl drop-shadow-md">🗑️</span>
     },
+    taxometer: {
+        title: "Taxometer",
+        icon: <span className="text-4xl drop-shadow-md">💸</span>
+    }
 };
 
 /* --- Menu Data --- */
@@ -344,6 +348,122 @@ function TrashApp({ isDarkMode }: { isDarkMode: boolean }) {
     );
 }
 
+/* --- Taxometer Component --- */
+function TaxometerApp({ isDarkMode }: { isDarkMode: boolean }) {
+    const [counts, setCounts] = useState<{ [key: string]: number }>({
+        brazil: 0,
+        usa: 0,
+        china: 0,
+        uk: 0
+    });
+
+    const RATES = {
+        brazil: 85616, // BRL per second (based on ~2.7T BRL/year)
+        usa: 155377,   // USD per second (based on ~4.9T USD/year)
+        china: 951293, // CNY per second (based on ~30T CNY/year)
+        uk: 31709      // GBP per second (based on ~1T GBP/year)
+    };
+
+    useEffect(() => {
+        // Calculate initial values based on time elapsed in the current year
+        const now = new Date();
+        const startOfYear = new Date(now.getFullYear(), 0, 1);
+        const secondsElapsed = (now.getTime() - startOfYear.getTime()) / 1000;
+
+        setCounts({
+            brazil: secondsElapsed * RATES.brazil,
+            usa: secondsElapsed * RATES.usa,
+            china: secondsElapsed * RATES.china,
+            uk: secondsElapsed * RATES.uk
+        });
+
+        const interval = setInterval(() => {
+            setCounts(prev => ({
+                brazil: prev.brazil + (RATES.brazil / 10),
+                usa: prev.usa + (RATES.usa / 10),
+                china: prev.china + (RATES.china / 10),
+                uk: prev.uk + (RATES.uk / 10)
+            }));
+        }, 100); // 10 updates per second
+
+        return () => clearInterval(interval);
+    }, []);
+
+    const formatCurrency = (value: number, currency: string, locale: string) => {
+        return new Intl.NumberFormat(locale, {
+            style: 'currency',
+            currency: currency,
+            minimumFractionDigits: 2,
+            maximumFractionDigits: 2
+        }).format(value);
+    };
+
+    return (
+        <div className={`p-4 md:p-8 h-full overflow-y-auto ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+            <div className="max-w-4xl mx-auto">
+                <div className="text-center mb-8 md:mb-10">
+                    <h2 className={`text-2xl md:text-3xl font-bold mb-2 md:mb-4 ${isDarkMode ? 'text-white' : 'text-black'}`}>Taxometer</h2>
+                    <p className={`text-sm md:text-lg ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        Estimated tax revenue collected since January 1st, {new Date().getFullYear()}
+                    </p>
+                </div>
+
+                <div className="grid gap-4 md:gap-6 md:grid-cols-2">
+                    {/* Brazil */}
+                    <div className={`p-4 md:p-6 rounded-xl border relative overflow-hidden group ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition-transform select-none">🇧🇷</div>
+                        <h3 className="text-sm font-bold uppercase tracking-wider opacity-70 mb-2">Brazil</h3>
+                        <div className="text-xl md:text-3xl font-mono font-bold text-green-500 tabular-nums tracking-tight">
+                            {formatCurrency(counts.brazil, 'BRL', 'pt-BR')}
+                        </div>
+                        <p className="text-xs mt-2 opacity-50">~R$ 85k per second</p>
+                    </div>
+
+                    {/* USA */}
+                    <div className={`p-4 md:p-6 rounded-xl border relative overflow-hidden group ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition-transform select-none">🇺🇸</div>
+                        <h3 className="text-sm font-bold uppercase tracking-wider opacity-70 mb-2">United States</h3>
+                        <div className="text-xl md:text-3xl font-mono font-bold text-blue-500 tabular-nums tracking-tight">
+                            {formatCurrency(counts.usa, 'USD', 'en-US')}
+                        </div>
+                        <p className="text-xs mt-2 opacity-50">~$ 155k per second</p>
+                    </div>
+
+                    {/* China */}
+                    <div className={`p-4 md:p-6 rounded-xl border relative overflow-hidden group ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition-transform select-none">🇨🇳</div>
+                        <h3 className="text-sm font-bold uppercase tracking-wider opacity-70 mb-2">China</h3>
+                        <div className="text-xl md:text-3xl font-mono font-bold text-red-500 tabular-nums tracking-tight">
+                            {formatCurrency(counts.china, 'CNY', 'zh-CN')}
+                        </div>
+                        <p className="text-xs mt-2 opacity-50">~¥ 951k per second</p>
+                    </div>
+
+                    {/* UK */}
+                    <div className={`p-4 md:p-6 rounded-xl border relative overflow-hidden group ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-white border-gray-200 shadow-sm'}`}>
+                        <div className="absolute top-0 right-0 p-4 opacity-10 text-6xl group-hover:scale-110 transition-transform select-none">🇬🇧</div>
+                        <h3 className="text-sm font-bold uppercase tracking-wider opacity-70 mb-2">United Kingdom</h3>
+                        <div className="text-xl md:text-3xl font-mono font-bold text-indigo-500 tabular-nums tracking-tight">
+                            {formatCurrency(counts.uk, 'GBP', 'en-GB')}
+                        </div>
+                        <p className="text-xs mt-2 opacity-50">~£ 31k per second</p>
+                    </div>
+                </div>
+
+                <div className={`mt-8 p-4 rounded-lg text-xs md:text-sm border ${isDarkMode ? 'bg-blue-900/10 border-blue-800 text-blue-200' : 'bg-blue-50 border-blue-100 text-blue-800'}`}>
+                    <p className="flex gap-2">
+                        <span className="text-xl">ℹ️</span>
+                        <span>
+                            <strong>Note:</strong> Real-time public APIs for live global tax revenue do not exist.
+                            These figures are <strong>real-time estimates</strong> based on official 2024/2025 fiscal projections (e.g., Brazil's R$ 2.7T and USA's $4.9T targets), calculated down to the millisecond.
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    );
+}
+
 /* --- App Content Switcher --- */
 function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkMode: boolean }) {
     switch (app) {
@@ -472,21 +592,21 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
         case "cv":
             return (
-                <div className={`mx-auto max-w-5xl px-12 py-12 font-sans ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
+                <div className={`mx-auto max-w-5xl px-6 md:px-12 py-8 md:py-12 font-sans ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                     {/* Header */}
-                    <div className={`mb-12 flex items-end justify-between border-b pb-6 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
-                        <div className="flex items-center gap-8">
+                    <div className={`mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b pb-6 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
+                        <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-8 text-center md:text-left">
                             <img
                                 src={facePic.src}
                                 alt="Gustavo Fermino Uessler"
-                                className={`h-28 w-28 rounded-full border-4 object-cover shadow-sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}
+                                className={`h-24 w-24 md:h-28 md:w-28 rounded-full border-4 object-cover shadow-sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}
                             />
                             <div>
-                                <h2 className={`text-4xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-black'}`}>Gustavo Fermino Uessler</h2>
-                                <p className={`mt-2 text-lg font-medium text-left ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Software Engineer/Developer/Programmer</p>
+                                <h2 className={`text-2xl md:text-4xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-black'}`}>Gustavo Fermino Uessler</h2>
+                                <p className={`mt-2 text-base md:text-lg font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Software Engineer/Developer/Programmer</p>
                             </div>
                         </div>
-                        <button className={`rounded-full px-6 py-2.5 text-sm font-bold transition-transform hover:scale-105 shadow-sm mb-4 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
+                        <button className={`w-full md:w-auto rounded-full px-6 py-2.5 text-sm font-bold transition-transform hover:scale-105 shadow-sm mb-0 md:mb-4 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
                             Download PDF
                         </button>
                     </div>
@@ -494,11 +614,11 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                     {/* Experience Section */}
                     <div className="mb-16">
                         <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Core Experience</h3>
-                        <div className={`relative border-l ml-2 pl-10 space-y-12 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
+                        <div className={`relative border-l ml-2 pl-6 md:pl-10 space-y-12 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
 
                             {/* SCI */}
                             <div className="relative">
-                                <div className={`absolute -left-[45px] top-1.5 h-4 w-4 rounded-full ring-4 ${isDarkMode ? 'bg-white ring-[#1a1a1a]' : 'bg-black ring-white'}`}></div>
+                                <div className={`absolute -left-[29px] md:-left-[45px] top-1.5 h-4 w-4 rounded-full ring-4 ${isDarkMode ? 'bg-white ring-[#1a1a1a]' : 'bg-black ring-white'}`}></div>
                                 <div>
                                     <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer</h4>
                                     <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>SCI Sistemas Contábeis</div>
@@ -530,7 +650,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
                             {/* Bremen */}
                             <div className="relative">
-                                <div className={`absolute -left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-400 ring-[#1a1a1a]' : 'bg-gray-400 ring-white'}`}></div>
+                                <div className={`absolute -left-[28px] md:-left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-400 ring-[#1a1a1a]' : 'bg-gray-400 ring-white'}`}></div>
                                 <div>
                                     <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer (Contract)</h4>
                                     <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bremen Sistemas</div>
@@ -562,7 +682,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
                             {/* Custom IT */}
                             <div className="relative">
-                                <div className={`absolute -left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-500 ring-[#1a1a1a]' : 'bg-gray-300 ring-white'}`}></div>
+                                <div className={`absolute -left-[28px] md:-left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-500 ring-[#1a1a1a]' : 'bg-gray-300 ring-white'}`}></div>
                                 <div>
                                     <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Junior Front-end Developer</h4>
                                     <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Custom IT</div>
@@ -575,7 +695,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
                             {/* Previous Roles Grouped */}
                             <div className="relative">
-                                <div className={`absolute -left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-600 ring-[#1a1a1a]' : 'bg-gray-200 ring-white'}`}></div>
+                                <div className={`absolute -left-[28px] md:-left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-600 ring-[#1a1a1a]' : 'bg-gray-200 ring-white'}`}></div>
                                 <div className="space-y-6">
                                     <div>
                                         <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SAP MM Support Agent</h4>
@@ -624,7 +744,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                             {/* Languages */}
                             <div>
                                 <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Languages</h3>
-                                <div className="grid grid-cols-2 gap-y-4 gap-x-8">
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                                     <div>
                                         <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Portuguese</div>
                                         <div className="text-xs text-gray-500">Native</div>
@@ -669,6 +789,9 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
 
         case "trash":
             return <TrashApp isDarkMode={isDarkMode} />;
+
+        case "taxometer":
+            return <TaxometerApp isDarkMode={isDarkMode} />;
     }
 }
 
@@ -1206,9 +1329,15 @@ export default function Desktop() {
     const bounceRef = useRef({ x: 0, y: 0, dx: 0, dy: 0, colorIdx: 0 });
     const requestRef = useRef<number | undefined>(undefined);
 
-    const startBouncing = () => {
-        const startX = window.innerWidth / 2 - 60;
-        const startY = 14;
+    const startBouncing = (startRect?: DOMRect) => {
+        let startX = window.innerWidth / 2 - 60;
+        let startY = 14;
+
+        if (startRect) {
+            startX = startRect.left;
+            startY = startRect.top;
+        }
+
         const angle = Math.random() * 2 * Math.PI;
         const speed = 5; // Faster pace
 
@@ -1441,7 +1570,7 @@ export default function Desktop() {
         }
     }
 
-    const leftApps: AppId[] = ["about", "yuj"];
+    const leftApps: AppId[] = ["about", "yuj", "taxometer"];
     const rightApps: AppId[] = ["cv", "terminal", "contact", "trash"];
 
     const formatLoginTime = () => {
@@ -1513,12 +1642,12 @@ export default function Desktop() {
                 `}} />
             {/* 1. Top Bar: System Menu */}
             <header className={`relative flex h-10 shrink-0 items-center justify-between border-b pl-0 pr-4 shadow-sm z-[10002] ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-[#e9e9e9] border-gray-300'}`}>
-                <div className="flex h-full items-center gap-6">
-                    <div className="hidden md:block">
+                <div className="flex h-full items-center gap-2 md:gap-6 overflow-x-auto no-scrollbar">
+                    <div className="h-full flex items-center">
                         <ClockWidget />
                     </div>
                     {/* Brazil Flag SVG - Windows safe */}
-                    <a href="https://en.wikipedia.org/wiki/Brazil" target="_blank" rel="noopener noreferrer" className="hover:opacity-80 transition-opacity hidden md:block" title="Brazil - Wikipedia">
+                    <a href="https://en.wikipedia.org/wiki/Brazil" target="_blank" rel="noopener noreferrer" className="hidden md:block hover:opacity-80 transition-opacity" title="Brazil - Wikipedia">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" className="w-6 h-auto shadow-sm rounded-[1px]">
                             <rect width="1000" height="700" fill="#009b3a" />
                             <path d="M500 127L873 350 500 573 127 350z" fill="#fedf00" />
@@ -1526,10 +1655,10 @@ export default function Desktop() {
                             <path d="M370 410c50-40 130-50 260 0" stroke="#fff" strokeWidth="30" fill="none" />
                         </svg>
                     </a>
-                    <div className="hidden md:block">
+                    <div className="flex items-center">
                         <WeatherWidget isDarkMode={isDarkMode} />
                     </div>
-                    <nav className="flex gap-4">
+                    <nav className="flex gap-2 md:gap-4">
                         {MENU_DATA.map((item, i) => (
                             <TopMenuItem key={i} item={item} onNavigate={(url) => handleMenuNavigate(url)} isDarkMode={isDarkMode} />
                         ))}
@@ -1537,18 +1666,6 @@ export default function Desktop() {
                 </div>
 
                 {/* Centered Logo */}
-                {!isBouncing && (
-                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 h-full py-0.5 cursor-pointer z-[10003]" onClick={startBouncing} title="Click for a surprise...">
-                        <span className={`absolute right-full top-1/2 -translate-y-1/2 mr-3 font-bold font-sans ${isDarkMode ? 'text-white' : 'text-black'} flex items-center gap-1 whitespace-nowrap`}>
-                            Click me!
-                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="animate-pulse">
-                                <line x1="5" y1="12" x2="19" y2="12"></line>
-                                <polyline points="12 5 19 12 12 19"></polyline>
-                            </svg>
-                        </span>
-                        <img src={gustavoLogo.src} alt="Gustavo Uessler" className="h-full w-auto object-cover" />
-                    </div>
-                )}
                 <div className="flex items-center gap-4 relative">
                     {/* Active Windows Toggle */}
                     <button
@@ -1748,7 +1865,7 @@ export default function Desktop() {
                 <main ref={mainRef} className="relative flex-1 pointer-events-none">
                     <div className="absolute inset-0 pointer-events-auto">
                         {/* Mobile Icon Grid */}
-                        <div className={`md:hidden absolute inset-0 grid grid-cols-3 grid-rows-4 p-8 gap-4 justify-items-center content-center z-10`}>
+                        <div className={`md:hidden absolute inset-0 flex flex-col flex-wrap content-start items-start p-6 gap-4 z-10`}>
                             {[...leftApps, ...rightApps].map(app => (
                                 <button
                                     key={app}
@@ -1780,6 +1897,16 @@ export default function Desktop() {
                                 isMobile={isMobile}
                             />
                         ))}
+                    </div>
+
+                    {/* App Content Switcher for Taxometer */}
+                    <div className="hidden">
+                        {wins.map(win => {
+                            if (win.app === 'taxometer') {
+                                return <TaxometerApp key={win.id} isDarkMode={isDarkMode} />;
+                            }
+                            return null;
+                        })}
                     </div>
 
                 </main>
@@ -1850,6 +1977,29 @@ export default function Desktop() {
                     className="fixed h-14 w-auto z-[10005] cursor-pointer select-none left-0 top-0 will-change-transform shadow-2xl rounded-lg"
                     onClick={stopBouncing}
                 />
+            )}
+
+            {/* Float Trigger Button (Bottom) */}
+            {!isBouncing && (
+                <div
+                    className="fixed bottom-6 left-1/2 -translate-x-1/2 z-[10003] cursor-pointer flex flex-col items-center gap-2 group"
+                    onClick={(e) => {
+                        // Get the image element rect for precise alignment
+                        const img = e.currentTarget.querySelector('img');
+                        startBouncing(img?.getBoundingClientRect());
+                    }}
+                    title="Click for a surprise..."
+                >
+                    <div className={`relative px-3 py-1 rounded-full text-xs font-bold font-sans animate-bounce shadow-sm ${isDarkMode ? 'bg-white/10 text-white border border-white/20' : 'bg-black/10 text-black border border-black/10'}`}>
+                        Click me!
+                        <div className={`absolute left-1/2 -translate-x-1/2 top-full w-0 h-0 border-l-[4px] border-l-transparent border-r-[4px] border-r-transparent border-t-[4px] ${isDarkMode ? 'border-t-white/20' : 'border-t-black/10'}`}></div>
+                    </div>
+                    <img
+                        src={gustavoLogo.src}
+                        alt="Gustavo Uessler"
+                        className="h-14 w-auto rounded-lg border-2 border-white/50 shadow-lg object-contain transition-transform hover:scale-110 active:scale-95 bg-black"
+                    />
+                </div>
             )}
         </div>
     );
