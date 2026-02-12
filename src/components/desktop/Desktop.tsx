@@ -3,6 +3,7 @@
 import React, { useState, useRef, useEffect } from "react";
 import WeatherWidget from "./WeatherWidget";
 import ClockWidget from "./ClockWidget";
+import CalendarWidget from "./CalendarWidget";
 
 // Images
 
@@ -10,6 +11,20 @@ import gustavoLogo from "@/assets/GustavoUesslerCNlogo.jpg";
 import userImage from "@/assets/userImageDefault.jpg";
 import facePic from "@/assets/facePic.jpg";
 import logoTriad from "@/assets/logoTriad.png";
+import sciLogo from "@/assets/SCIlogo.jpg";
+import bremenLogo from "@/assets/BremenLogo.jpg";
+import cloudWorksLogo from "@/assets/CloudWorksLogo.jpg";
+import keelingsLogo from "@/assets/KeelingsLogo.jpg";
+import mrLogo from "@/assets/MRLogo.jpg";
+import customITLogo from "@/assets/CustomITLogo.jpg";
+import tSystemsLogo from "@/assets/T-SystemsLogo.jpg";
+import eventialsLogo from "@/assets/EventialsLogo.jpg";
+import ifcLogo from "@/assets/IFClogo.jpg";
+import senaiLogo from "@/assets/SENAIlogo.jpg";
+import brazilFlag from "@/assets/FlagofBrazil.png";
+import usaFlag from "@/assets/FlagoftheUnitedStates.png";
+import germanyFlag from "@/assets/FlagofGermany.png";
+import spainFlag from "@/assets/FlagofSpain.png";
 
 type AppId = "about" | "cv" | "contact" | "terminal" | "browser" | "trash" | "yuj" | "taxometer";
 
@@ -284,7 +299,9 @@ function ContactApp({ isDarkMode }: { isDarkMode: boolean }) {
                         className="flex items-center gap-4 text-green-600 transition-all duration-200 group active:scale-105 origin-left"
                     >
                         <div className={`p-3 border rounded-xl transition-colors shadow-sm ${isDarkMode ? 'bg-green-900/20 border-green-800 text-green-500 group-hover:bg-green-900/30' : 'bg-green-50 border-green-200 text-green-600 group-hover:bg-green-100 group-active:bg-green-200 group-active:border-green-300'}`}>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z" /></svg>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z" />
+                            </svg>
                         </div>
                         <div className="group-hover:text-green-700 group-active:text-green-800 transition-colors">
                             <div className="text-xs font-semibold uppercase opacity-60">WhatsApp</div>
@@ -305,6 +322,42 @@ function ContactApp({ isDarkMode }: { isDarkMode: boolean }) {
                         <div className="group-hover:text-pink-700 group-active:text-pink-800 transition-colors">
                             <div className="text-xs font-semibold uppercase opacity-60">Instagram</div>
                             <span className="font-medium">@gusuessler</span>
+                        </div>
+                    </a>
+
+                    {/* LinkedIn - Color & Scale Interaction */}
+                    <a
+                        href="https://www.linkedin.com/in/gustavouessler/"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center gap-4 text-blue-600 transition-all duration-200 group active:scale-105 origin-left"
+                    >
+                        <div className={`p-3 border rounded-xl transition-colors shadow-sm ${isDarkMode ? 'bg-blue-900/20 border-blue-800 text-blue-500 group-hover:bg-blue-900/30' : 'bg-blue-50 border-blue-200 text-blue-600 group-hover:bg-blue-100 group-active:bg-blue-200 group-active:border-blue-300'}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                            </svg>
+                        </div>
+                        <div className="group-hover:text-blue-700 group-active:text-blue-800 transition-colors">
+                            <div className="text-xs font-semibold uppercase opacity-60">LinkedIn</div>
+                            <span className="font-medium">Gustavo Fermino Uessler</span>
+                        </div>
+                    </a>
+
+                    {/* GitHub - Color & Scale Interaction */}
+                    <a
+                        href="https://github.com/gusuessler"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className={`flex items-center gap-4 transition-all duration-200 group active:scale-105 origin-left ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}
+                    >
+                        <div className={`p-3 border rounded-xl transition-colors shadow-sm ${isDarkMode ? 'bg-gray-800/50 border-gray-700 text-gray-400 group-hover:bg-gray-800' : 'bg-gray-50 border-gray-200 text-gray-600 group-hover:bg-gray-100 group-active:bg-gray-200 group-active:border-gray-300'}`}>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z" />
+                            </svg>
+                        </div>
+                        <div className={`transition-colors ${isDarkMode ? 'group-hover:text-gray-200' : 'group-hover:text-gray-800 group-active:text-gray-900'}`}>
+                            <div className="text-xs font-semibold uppercase opacity-60">GitHub</div>
+                            <span className="font-medium">gusuessler</span>
                         </div>
                     </a>
                 </div>
@@ -595,120 +648,257 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                 <div className={`mx-auto max-w-5xl px-6 md:px-12 py-8 md:py-12 font-sans ${isDarkMode ? 'text-gray-200' : 'text-gray-800'}`}>
                     {/* Header */}
                     <div className={`mb-8 md:mb-12 flex flex-col md:flex-row md:items-end justify-between gap-6 border-b pb-6 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
-                        <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-8 text-center md:text-left">
-                            <img
-                                src={facePic.src}
-                                alt="Gustavo Fermino Uessler"
-                                className={`h-24 w-24 md:h-28 md:w-28 rounded-full border-4 object-cover shadow-sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}
-                            />
-                            <div>
-                                <h2 className={`text-2xl md:text-4xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-black'}`}>Gustavo Fermino Uessler</h2>
-                                <p className={`mt-2 text-base md:text-lg font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Software Engineer/Developer/Programmer</p>
+                        <div className="flex flex-row items-start md:items-center gap-4 md:gap-8 justify-between w-full md:w-auto">
+                            <div className="flex flex-col md:flex-row items-center md:items-center gap-4 md:gap-8 text-center md:text-left">
+                                <img
+                                    src={facePic.src}
+                                    alt="Gustavo Fermino Uessler"
+                                    className={`h-24 w-24 md:h-28 md:w-28 rounded-full border-4 object-cover shadow-sm ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}
+                                />
+                                <div>
+                                    <h2 className={`text-2xl md:text-4xl font-extrabold tracking-tight ${isDarkMode ? 'text-white' : 'text-black'}`}>Gustavo Fermino Uessler</h2>
+                                    <p className={`mt-2 text-base md:text-lg font-medium ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Software Engineer/Developer/Architect</p>
+                                </div>
+                            </div>
+
+                            {/* Location Map Widget - Shows beside title on mobile */}
+                            <div className="flex-shrink-0 md:hidden">
+                                <div className="text-xs font-semibold text-gray-400 mb-2">From:</div>
+                                <div className={`rounded-lg overflow-hidden border-2 shadow-sm ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                                    <div className={`px-2 py-1 text-[10px] font-semibold flex items-center gap-1 ${isDarkMode ? 'bg-[#2d2d2d] text-gray-300' : 'bg-gray-100 text-gray-700'}`}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                            <circle cx="12" cy="10" r="3" />
+                                        </svg>
+                                        Blumenau
+                                    </div>
+                                    <iframe
+                                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113540.89537176704!2d-49.13654842343749!3d-26.919020999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df181df5df7e0b%3A0x2e67e0c257171640!2sBlumenau%2C%20SC!5e0!3m2!1sen!2sbr!4v1234567890123!5m2!1sen!2sbr"
+                                        width="120"
+                                        height="100"
+                                        style={{ border: 0 }}
+                                        allowFullScreen={false}
+                                        loading="lazy"
+                                        referrerPolicy="no-referrer-when-downgrade"
+                                        title="Blumenau Location"
+                                    />
+                                </div>
                             </div>
                         </div>
-                        <button className={`w-full md:w-auto rounded-full px-6 py-2.5 text-sm font-bold transition-transform hover:scale-105 shadow-sm mb-0 md:mb-4 ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}>
-                            Download PDF
-                        </button>
+
+                        {/* Location Map Widget - Shows on desktop */}
+                        <div className="hidden md:block">
+                            <div className="text-xs font-semibold text-gray-400 mb-2">From:</div>
+                            <div className={`rounded-lg overflow-hidden border-2 shadow-sm ${isDarkMode ? 'border-gray-700' : 'border-gray-200'}`}>
+                                <div className={`px-3 py-1.5 text-xs font-semibold flex items-center gap-2 ${isDarkMode ? 'bg-[#2d2d2d] text-gray-300' : 'bg-gray-100 text-gray-700'}`}>
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                                        <circle cx="12" cy="10" r="3" />
+                                    </svg>
+                                    Blumenau, SC, Brazil
+                                </div>
+                                <iframe
+                                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d113540.89537176704!2d-49.13654842343749!3d-26.919020999999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94df181df5df7e0b%3A0x2e67e0c257171640!2sBlumenau%2C%20SC!5e0!3m2!1sen!2sbr!4v1234567890123!5m2!1sen!2sbr"
+                                    width="200"
+                                    height="150"
+                                    style={{ border: 0 }}
+                                    allowFullScreen={false}
+                                    loading="lazy"
+                                    referrerPolicy="no-referrer-when-downgrade"
+                                    title="Blumenau Location"
+                                />
+                            </div>
+                        </div>
+
+
+                        <div className="flex flex-col md:flex-row gap-3 w-full md:w-auto">
+                            <a
+                                href="/GUSTAVO_FERMINO_UESSLER_CV_ENGLISH.pdf"
+                                download="GUSTAVO_FERMINO_UESSLER_CV_ENGLISH.pdf"
+                                className={`w-full md:w-auto rounded-full px-6 py-2.5 text-sm font-bold transition-transform hover:scale-105 shadow-sm text-center ${isDarkMode ? 'bg-white text-black hover:bg-gray-200' : 'bg-black text-white hover:bg-gray-800'}`}
+                            >
+                                Download PDF
+                            </a>
+                            <a
+                                href="https://www.linkedin.com/in/gustavouessler/"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                className={`w-full md:w-auto rounded-full px-6 py-2.5 text-sm font-bold transition-transform hover:scale-105 shadow-sm text-center flex items-center justify-center gap-2 ${isDarkMode ? 'bg-[#0077b5] text-white hover:bg-[#006399]' : 'bg-[#0077b5] text-white hover:bg-[#006399]'}`}
+                            >
+                                <svg className="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+                                    <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z" />
+                                </svg>
+                                LinkedIn
+                            </a>
+                        </div>
                     </div>
 
                     {/* Experience Section */}
                     <div className="mb-16">
-                        <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Core Experience</h3>
-                        <div className={`relative border-l ml-2 pl-6 md:pl-10 space-y-12 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
+                        <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Experience</h3>
+                        <div className={`relative border-l ml-8 md:ml-12 pl-8 md:pl-10 space-y-12 ${isDarkMode ? 'border-gray-700' : 'border-gray-300'}`}>
+
+                            {/* Professional Development */}
+                            <div className="relative">
+                                <div className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden flex items-center justify-center text-3xl md:text-4xl shadow-sm bg-clip-padding ${isDarkMode ? 'bg-[#2d2d2d] border-[#1a1a1a]' : 'bg-white border-gray-50'}`}>
+                                    📅
+                                </div>
+                                <div>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Professional Development</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Career break</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Feb 2026 - Present · 1 mo | Blumenau, Santa Catarina, Brazil</p>
+                                </div>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">Building personal SaaS projects.</p>
+                                    <p className="mb-2">Focused on advanced system design and distributed systems.</p>
+                                    <p className="mb-2">Deepening expertise in Node.js + React, Spring Boot + Angular, and AI-driven engineering practices for scalable web applications.</p>
+                                    <p>Exploring remote opportunities with mainly US-based companies.</p>
+                                </div>
+                            </div>
 
                             {/* SCI */}
                             <div className="relative">
-                                <div className={`absolute -left-[29px] md:-left-[45px] top-1.5 h-4 w-4 rounded-full ring-4 ${isDarkMode ? 'bg-white ring-[#1a1a1a]' : 'bg-black ring-white'}`}></div>
+                                <a href="https://sci.com.br/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={sciLogo.src} alt="SCI Sistemas Contábeis" className="w-full h-full object-contain" />
+                                </a>
                                 <div>
                                     <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer</h4>
-                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>SCI Sistemas Contábeis</div>
-                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Nov 2025 – Present | Blumenau, Brazil</p>
-                                </div>
-
-                                <p className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Working on accounting and fiscal systems used by real companies in production.</p>
-
-                                <div className="grid gap-6 md:grid-cols-2">
-                                    <div className={`p-6 rounded-xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
-                                        <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">What I do</strong>
-                                        <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Develop & maintain critical accounting software</li>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Implement legal/fiscal requirements</li>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Legacy code refactoring & bug fixing</li>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Direct technical user support</li>
-                                        </ul>
-                                    </div>
-                                    <div className={`p-6 rounded-xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
-                                        <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">What it represents</strong>
-                                        <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Deep responsibility & precision</li>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Complex domain rules mastery</li>
-                                            <li className="flex gap-3"><span className="text-gray-300">•</span> Long-term system evolution</li>
-                                        </ul>
-                                    </div>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>SCI Sistemas Contábeis · Full-time</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Nov 2025 - Feb 2026 · 4 mos | Blumenau, Santa Catarina, Brazil · On-site</p>
                                 </div>
                             </div>
 
                             {/* Bremen */}
                             <div className="relative">
-                                <div className={`absolute -left-[28px] md:-left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-400 ring-[#1a1a1a]' : 'bg-gray-400 ring-white'}`}></div>
+                                <a href="https://bremen.com.br/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={bremenLogo.src} alt="Bremen Sistemas" className="w-full h-full object-contain" />
+                                </a>
                                 <div>
-                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer (Contract)</h4>
-                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bremen Sistemas</div>
-                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Aug 2023 – Nov 2025 | Blumenau, Brazil</p>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Bremen Sistemas · Contract</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Aug 2023 - Nov 2025 · 2 yrs 4 mos | Blumenau, Santa Catarina, Brazil · On-site</p>
                                 </div>
-                                <p className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Specialized Wingraph ERP development for the printing industry.</p>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">Planning, programming and testing software. Performing maintenance on systems, making any necessary corrections to meet user needs. Developing, debugging and testing programs, performing maintenance services on programs already developed.</p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Delphi</span>
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>MySQL</span>
+                                    </div>
+                                </div>
+                            </div>
 
-                                <div className={`p-6 rounded-xl border ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-gray-50 border-gray-100'}`}>
-                                    <div className="grid md:grid-cols-2 gap-8">
-                                        <div>
-                                            <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">Contributions</strong>
-                                            <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                                <li className="flex gap-3"><span className="text-gray-300">•</span> Feature planning & maintenance</li>
-                                                <li className="flex gap-3"><span className="text-gray-300">•</span> Delphi, MySQL, Git workflows</li>
-                                                <li className="flex gap-3"><span className="text-gray-300">•</span> ERP module validation</li>
-                                            </ul>
-                                        </div>
-                                        <div>
-                                            <strong className="block text-xs font-bold uppercase text-gray-400 mb-3 tracking-wider">Sharpened Skills</strong>
-                                            <ul className={`list-none space-y-2 text-sm ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                                                <li className="flex gap-3"><span className="text-gray-300">•</span> Business process modeling</li>
-                                                <li className="flex gap-3"><span className="text-gray-300">•</span> Domain-specific software logic</li>
-                                                <li className="flex gap-3"><span className="text-gray-300">•</span> Legacy system respect</li>
-                                            </ul>
-                                        </div>
+                            {/* CloudWorks */}
+                            <div className="relative">
+                                <a href="https://www.cloudworks.com.br/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={cloudWorksLogo.src} alt="CloudWorks" className="w-full h-full object-contain" />
+                                </a>
+                                <div>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Database Administrator</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>CloudWorks - Gerenciamento de Banco de Dados · Full-time</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Feb 2023 - Aug 2023 · 7 mos | Blumenau, Santa Catarina, Brazil · Hybrid</p>
+                                </div>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">Creating Multidimensional Model Databases (SSAS)</p>
+                                    <p className="mb-2">Implementing features such as Incremental Refresh on Power BI reports</p>
+                                    <p className="mb-2">Implementing Zabbix Items and triggers for proxyless client</p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>SQL Server Analysis Services (SSAS)</span>
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Zabbix</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Keelings */}
+                            <div className="relative">
+                                <a href="https://www.keelings.com/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={keelingsLogo.src} alt="Keelings" className="w-full h-full object-contain" />
+                                </a>
+                                <div>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Warehouse Operative</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Keelings · Part-time</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Jul 2022 - Nov 2022 · 5 mos | Dublin, County Dublin, Ireland</p>
+                                </div>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">-25C Freezer Store picking Using Low level Order Picker.</p>
+                                    <p className="mb-2">Line picking products from pallets into the designated Store cages and dollies.</p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Warehouse Operations</span>
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Performance Management</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            {/* MR Ateliê */}
+                            <div className="relative">
+                                <a href="https://oficinadajoia.com.br/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={mrLogo.src} alt="MR Ateliê de Joias" className="w-full h-full object-contain" />
+                                </a>
+                                <div>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Goldsmith</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>MR Ateliê de Joias · Full-time</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Feb 2019 - Apr 2022 · 3 yrs 3 mos | Blumenau, Santa Catarina, Brasil</p>
+                                </div>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">3D Jewelry Modeling Using Rhinoceros, Jewelry finishing, Service delivery, workshop maintenance and Administrative assistance.</p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Customer Service</span>
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Craftsmanship</span>
                                     </div>
                                 </div>
                             </div>
 
                             {/* Custom IT */}
                             <div className="relative">
-                                <div className={`absolute -left-[28px] md:-left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-500 ring-[#1a1a1a]' : 'bg-gray-300 ring-white'}`}></div>
+                                <a href="https://customit.com.br/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={customITLogo.src} alt="Custom IT Sistemas" className="w-full h-full object-contain" />
+                                </a>
                                 <div>
-                                    <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Junior Front-end Developer</h4>
-                                    <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Custom IT</div>
-                                    <p className="text-xs text-gray-400 mt-1 font-mono">Nov 2018 – Feb 2019</p>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Software Developer</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Custom IT Sistemas · Full-time</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Nov 2018 - Feb 2019 · 4 mos | Blumenau, Santa Catarina, Brazil</p>
                                 </div>
-                                <p className={`mt-2 text-sm max-w-xl ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                                    Interface development (C#) & client interaction. Learned that UX problems are often communication problems.
-                                </p>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">Web front-end development using C#, .NET and customer technical support.</p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>HTML5</span>
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>SQL</span>
+                                    </div>
+                                </div>
                             </div>
 
-                            {/* Previous Roles Grouped */}
+                            {/* T-Systems */}
                             <div className="relative">
-                                <div className={`absolute -left-[28px] md:-left-[44px] top-2 h-3 w-3 rounded-full ring-4 ${isDarkMode ? 'bg-gray-600 ring-[#1a1a1a]' : 'bg-gray-200 ring-white'}`}></div>
-                                <div className="space-y-6">
-                                    <div>
-                                        <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SAP MM Support Agent</h4>
-                                        <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>T-Systems</div>
-                                        <p className="text-xs text-gray-400 mt-1 font-mono">Sep 2017 – May 2018</p>
-                                        <p className={`mt-2 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Enterprise support for international clients (English/German).</p>
+                                <a href="https://www.t-systems.com/br/pt" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={tSystemsLogo.src} alt="T-Systems do Brasil" className="w-full h-full object-contain" />
+                                </a>
+                                <div>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>SAP ERP MM Support Officer</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>T-Systems do Brasil · Full-time</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>Sep 2017 - May 2018 · 9 mos | Blumenau, Santa Catarina, Brazil</p>
+                                </div>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">Material Management support within the SAP ecosystem.</p>
+                                    <div className="mt-3 flex flex-wrap gap-2">
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Email Etiquette</span>
+                                        <span className={`px-2 py-1 text-xs rounded ${isDarkMode ? 'bg-gray-800 text-gray-300' : 'bg-gray-100 text-gray-700'}`}>Microsoft Excel</span>
                                     </div>
-                                    <div>
-                                        <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Junior Developer / Support</h4>
-                                        <div className={`text-sm font-semibold ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Eventials</div>
-                                        <p className="text-xs text-gray-400 mt-1 font-mono">May 2017 – Sep 2017</p>
-                                        <p className={`mt-2 text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Full lifecycle exposure: Code, QA, and Support.</p>
-                                    </div>
+                                </div>
+                            </div>
+
+                            {/* Eventials */}
+                            <div className="relative">
+                                <a href="https://lp.eventials.com/" target="_blank" rel="noopener noreferrer" className={`absolute -left-[60px] md:-left-[72px] top-1 h-14 w-14 md:h-16 md:w-16 rounded-md border-4 overflow-hidden bg-white bg-clip-padding hover:scale-105 transition-transform ${isDarkMode ? 'border-[#1a1a1a]' : 'border-gray-50'}`}>
+                                    <img src={eventialsLogo.src} alt="Eventials" className="w-full h-full object-contain" />
+                                </a>
+                                <div>
+                                    <h4 className={`text-xl font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Quality Assurance Officer</h4>
+                                    <div className={`text-md font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Eventials · Internship</div>
+                                    <p className={`text-sm mt-1 mb-4 font-mono ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>May 2017 - Sep 2017 · 5 mos | Blumenau, Santa Catarina</p>
+                                </div>
+                                <div className={`mb-6 max-w-2xl leading-relaxed ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                    <p className="mb-2">Desktop Application Version Building for Mac and Windows, Feature Testing, Client</p>
+                                    <p className="mb-2">Technical Support, FFmpeg Video Editing/Scripting, English-Portuguese Translations, Feature</p>
+                                    <p>Documentation</p>
                                 </div>
                             </div>
 
@@ -722,18 +912,28 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                         <div>
                             <h3 className="mb-8 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Education</h3>
                             <div className="space-y-8">
-                                <div className="group">
-                                    <h4 className={`text-lg font-bold border-l-2 pl-4 ${isDarkMode ? 'text-white border-white' : 'text-black border-black'}`}>IFSC – Instituto Federal de Santa Catarina</h4>
-                                    <div className="pl-4 mt-1">
-                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>Information System Analysis and Development</div>
-                                        <p className="text-xs text-gray-500 mt-1 font-mono">Feb 2017 – Oct 2020 | Technologist</p>
+                                <div className="group flex gap-4">
+                                    <a href="https://www.ifsc.edu.br/" target="_blank" rel="noopener noreferrer" className={`w-12 h-12 rounded-lg border overflow-hidden shrink-0 hover:scale-105 transition-transform ${isDarkMode ? 'bg-white border-gray-700' : 'bg-white border-gray-200'}`}>
+                                        <img src={ifcLogo.src} alt="IFSC" className="w-full h-full object-contain" />
+                                    </a>
+                                    <div>
+                                        <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>IFSC – Instituto Federal de Santa Catarina</h4>
+                                        <div className="mt-1">
+                                            <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>Information System Analysis and Development</div>
+                                            <p className="text-xs text-gray-500 mt-1 font-mono">Feb 2017 – Oct 2020 | Technologist</p>
+                                        </div>
                                     </div>
                                 </div>
-                                <div className="group">
-                                    <h4 className={`text-lg font-bold border-l-2 pl-4 ${isDarkMode ? 'text-white border-gray-700' : 'text-gray-900 border-gray-200'}`}>SENAI/SC</h4>
-                                    <div className="pl-4 mt-1">
-                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>Curso Técnico Integrado, IT</div>
-                                        <p className="text-xs text-gray-500 mt-1 font-mono">Feb 2015 – Oct 2016</p>
+                                <div className="group flex gap-4">
+                                    <a href="https://sc.senai.br/" target="_blank" rel="noopener noreferrer" className={`w-12 h-12 rounded-lg border overflow-hidden shrink-0 hover:scale-105 transition-transform ${isDarkMode ? 'bg-white border-gray-700' : 'bg-white border-gray-200'}`}>
+                                        <img src={senaiLogo.src} alt="SENAI" className="w-full h-full object-contain" />
+                                    </a>
+                                    <div>
+                                        <h4 className={`text-lg font-bold ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>SENAI/SC</h4>
+                                        <div className="mt-1">
+                                            <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-800'}`}>Curso Técnico Integrado, IT</div>
+                                            <p className="text-xs text-gray-500 mt-1 font-mono">Feb 2015 – Oct 2016</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -746,19 +946,27 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                                 <h3 className="mb-6 text-xs font-bold uppercase tracking-[0.2em] text-gray-400">Languages</h3>
                                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-y-4 gap-x-8">
                                     <div>
-                                        <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>Portuguese</div>
+                                        <div className={`flex items-center gap-2 text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>
+                                            <img src={brazilFlag.src} alt="Brazil Flag" className="h-5 w-7 object-cover rounded shadow-sm" /> Portuguese
+                                        </div>
                                         <div className="text-xs text-gray-500">Native</div>
                                     </div>
                                     <div>
-                                        <div className={`text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>English</div>
+                                        <div className={`flex items-center gap-2 text-sm font-bold ${isDarkMode ? 'text-white' : 'text-black'}`}>
+                                            <img src={usaFlag.src} alt="USA Flag" className="h-5 w-7 object-cover rounded shadow-sm" /> English
+                                        </div>
                                         <div className="text-xs text-gray-500">Full Professional (C2)</div>
                                     </div>
                                     <div>
-                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>German</div>
+                                        <div className={`flex items-center gap-2 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                            <img src={germanyFlag.src} alt="Germany Flag" className="h-5 w-7 object-cover rounded shadow-sm" /> German
+                                        </div>
                                         <div className="text-xs text-gray-500">Elementary</div>
                                     </div>
                                     <div>
-                                        <div className={`text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>Spanish</div>
+                                        <div className={`flex items-center gap-2 text-sm font-medium ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                            <img src={spainFlag.src} alt="Spain Flag" className="h-5 w-7 object-cover rounded shadow-sm" /> Spanish
+                                        </div>
                                         <div className="text-xs text-gray-500">Elementary</div>
                                     </div>
                                 </div>
@@ -778,7 +986,7 @@ function AppContent({ app, data, isDarkMode }: { app: AppId; data?: any; isDarkM
                             </div>
                         </div>
                     </div>
-                </div>
+                </div >
             );
 
         case "terminal":
@@ -1301,17 +1509,44 @@ function useIsMobile() {
 export default function Desktop() {
     const isMobile = useIsMobile();
     const [zTop, setZTop] = useState(100);
-    const [wins, setWins] = useState<WindowState[]>([
-        { id: "w1", app: "about", title: APP_META.about.title, x: 100, y: 50, z: 100, width: 800, height: 600 },
-    ]);
+    const [wins, setWins] = useState<WindowState[]>([]);
     const [showUserMenu, setShowUserMenu] = useState(false);
     const [showLogoutDialog, setShowLogoutDialog] = useState(false);
     const [isLoggedOut, setIsLoggedOut] = useState(false);
     const [loginTime] = useState(new Date());
     const [isDarkMode, setIsDarkMode] = useState(false);
     const [showWindowList, setShowWindowList] = useState(false);
+    const [isCalendarOpen, setIsCalendarOpen] = useState(false); // Added isCalendarOpen state
     const mainRef = useRef<HTMLElement>(null);
     const activeWindowsButtonRef = useRef<HTMLButtonElement>(null);
+
+    // Initialize the CV window with proper sizing
+    useEffect(() => {
+        const screenW = window.innerWidth;
+        const screenH = window.innerHeight;
+        const mainWidth = screenW - 192; // Screen Width - Left Sidebar 96px - Right Sidebar 96px
+        const mainHeight = screenH - 40; // Screen Height - Header 40px
+
+        const targetW = Math.max(600, mainWidth - 100); // 50px margin on each side
+        const targetH = Math.max(400, mainHeight - 80); // 40px margin top/bottom
+
+        const startX = (mainWidth - targetW) / 2;
+        const startY = (mainHeight - targetH) / 2;
+
+        setWins([
+            {
+                id: "w1",
+                app: "cv",
+                title: APP_META.cv.title,
+                x: startX,
+                y: startY,
+                z: 100,
+                width: targetW,
+                height: targetH,
+                isMaximized: isMobile
+            },
+        ]);
+    }, [isMobile]);
     const bounceElRef = useRef<HTMLImageElement>(null);
 
     // --- Bouncing Logo Logic ---
@@ -1643,9 +1878,19 @@ export default function Desktop() {
             {/* 1. Top Bar: System Menu */}
             <header className={`relative flex h-10 shrink-0 items-center justify-between border-b pl-0 pr-4 shadow-sm z-[10002] ${isDarkMode ? 'bg-[#2d2d2d] border-gray-700' : 'bg-[#e9e9e9] border-gray-300'}`}>
                 <div className="flex h-full items-center gap-2 md:gap-6 overflow-x-auto no-scrollbar">
-                    <div className="h-full flex items-center">
+                    <div
+                        className="flex h-full items-center cursor-pointer hover:bg-white/5 transition-colors"
+                        onClick={() => setIsCalendarOpen(!isCalendarOpen)}
+                    >
                         <ClockWidget />
                     </div>
+
+                    {/* Calendar Widget Overlay */}
+                    <CalendarWidget
+                        isOpen={isCalendarOpen}
+                        onClose={() => setIsCalendarOpen(false)}
+                        position={{ top: 48, left: 16 }}
+                    />
                     {/* Brazil Flag SVG - Windows safe */}
                     <a href="https://en.wikipedia.org/wiki/Brazil" target="_blank" rel="noopener noreferrer" className="hidden md:block hover:opacity-80 transition-opacity" title="Brazil - Wikipedia">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 700" className="w-6 h-auto shadow-sm rounded-[1px]">
@@ -1689,13 +1934,26 @@ export default function Desktop() {
                     {/* User Profile Button */}
                     <button
                         onClick={() => setShowUserMenu(!showUserMenu)}
-                        className="relative"
+                        className={`relative flex items-center justify-center transition-all ${isDarkMode ? 'hover:bg-gray-700/50' : 'hover:bg-gray-200/50'} ${showUserMenu ? (isDarkMode ? 'bg-gray-700' : 'bg-gray-200') : ''} rounded-md p-1.5`}
+                        title="User Profile"
                     >
-                        <img
-                            src={userImage.src}
-                            alt="User Profile"
-                            className="h-8 w-8 rounded-full border-2 border-gray-300 hover:border-gray-400 transition-colors object-cover"
-                        />
+                        <div className={`w-7 h-7 rounded-full border-2 flex items-center justify-center ${isDarkMode ? 'border-gray-400' : 'border-gray-600'}`}>
+                            <svg
+                                xmlns="http://www.w3.org/2000/svg"
+                                width="20"
+                                height="20"
+                                viewBox="0 0 24 24"
+                                fill="none"
+                                stroke="currentColor"
+                                strokeWidth="2"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
+                                className={isDarkMode ? 'text-gray-300' : 'text-gray-700'}
+                            >
+                                <path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2" />
+                                <circle cx="12" cy="7" r="4" />
+                            </svg>
+                        </div>
                     </button>
 
                     {/* User Dropdown Menu */}
