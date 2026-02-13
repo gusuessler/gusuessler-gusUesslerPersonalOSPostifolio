@@ -41,14 +41,14 @@ export default function ClockWidget() {
     const showColon = time.getSeconds() % 2 === 0;
 
     return (
-        <div className="flex flex-row items-center justify-center gap-4 px-4 h-full bg-black border-r border-gray-800 select-none cursor-default text-red-500">
+        <div className="flex flex-row items-center justify-center gap-1 md:gap-4 px-2 md:px-4 h-full bg-black border-r border-gray-800 select-none cursor-default text-red-500">
             {/* Time Display */}
-            <div className="text-2xl font-bold leading-none tracking-widest" style={{ fontFamily: "'DS-Digital', monospace" }}>
+            <div className="text-lg md:text-2xl font-bold leading-none tracking-wider md:tracking-widest whitespace-nowrap" style={{ fontFamily: "'DS-Digital', monospace" }}>
                 {timeStr.replace(':', showColon ? ':' : ' ')}
             </div>
 
             {/* Date Display */}
-            <div className="flex gap-2 text-sm leading-none font-medium text-red-500/80" style={{ fontFamily: "'DS-Digital', monospace" }}>
+            <div className="flex gap-1 md:gap-2 text-xs md:text-sm leading-none font-medium text-red-500/80 whitespace-nowrap" style={{ fontFamily: "'DS-Digital', monospace" }}>
                 <span>{weekDay}</span>
                 <span>{dateStr}</span>
             </div>
